@@ -1,0 +1,3 @@
+/home/neta/Desktop/pandemic/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/neta/Desktop/pandemic/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/neta/Desktop/pandemic/cmake-build-debug/CMakeFiles/Demo1.cpp.dir

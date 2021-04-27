@@ -6,8 +6,11 @@
 #define UNTITLED_COLOR_H
 
 namespace pandemic {
-    class Color {
-
+    enum Color {
+        blue, //=0
+        yellow, //=1
+        black, //=2
+        red //=3
     };
 }
 #endif //UNTITLED_COLOR_H

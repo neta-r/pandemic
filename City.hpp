@@ -6,66 +6,59 @@
 #include "Color.hpp"
 
 namespace pandemic {
-    class City {
-        std::string name;
-        pandemic::Color color;
-        //City nei[];
-    public:
-        static pandemic::City Algiers;
-        static pandemic::City Atlanta;
-        static pandemic::City Baghdad;
-        static pandemic::City Bangkok;
-        static pandemic::City Beijing;
-        static pandemic::City Bogota;
-        static pandemic::City BuenosAires;
-        static pandemic::City Cairo;
-        static pandemic::City Chennai;
-        static pandemic::City Chicago;
-        static pandemic::City Delhi;
-        static pandemic::City Essen;
-        static pandemic::City HoChiMinhCity;
-        static pandemic::City HongKong;
-        static pandemic::City Istanbul;
-        static pandemic::City Jakarta;
-        static pandemic::City Johannesburg;
-        static pandemic::City Karachi;
-        static pandemic::City Khartoum;
-        static pandemic::City Kinshasa;
-        static pandemic::City Kolkata;
-        static pandemic::City Lagos;
-        static pandemic::City Lima;
-        static pandemic::City London;
-        static pandemic::City LosAngeles;
-        static pandemic::City Madrid;
-        static pandemic::City Manila;
-        static pandemic::City MexicoCity;
-        static pandemic::City Miami;
-        static pandemic::City Milan;
-        static pandemic::City Montreal;
-        static pandemic::City Moscow;
-        static pandemic::City Mumbai;
-        static pandemic::City NewYork;
-        static pandemic::City Osaka;
-        static pandemic::City Paris;
-        static pandemic::City Riyadh;
-        static pandemic::City SanFrancisco;
-        static pandemic::City Santiago;
-        static pandemic::City SaoPaulo;
-        static pandemic::City Seoul;
-        static pandemic::City Shanghai;
-        static pandemic::City StPetersburg;
-        static pandemic::City Sydney;
-        static pandemic::City Taipei;
-        static pandemic::City Tehran;
-        static pandemic::City Tokyo;
-        static pandemic::City Washington;
-
-        City(std::string name, pandemic::Color color) {
-            this->name = name;
-            this->color = color;
-        }
-
-        City &addNei(City &nei);
+    enum City {
+        //BLUE
+        Atlanta, //=0
+        Chicago, //=1
+        Essen, //=2
+        London, //=3
+        Madrid, //=4
+        Milan, //=5
+        Montreal, //=6
+        NewYork, //=7
+        Paris, //=8
+        SanFrancisco, //=9
+        StPetersburg, //=10
+        Washington, //=11
+        //YELLOW
+        Bogota, //=12
+        BuenosAires, //=13
+        Johannesburg, //=14
+        Khartoum, //=15
+        Kinshasa, //=16
+        Lagos, //=17
+        Lima, //=18
+        LosAngeles, //=19
+        MexicoCity, //=20
+        Miami, //=21
+        Santiago, //=22
+        SaoPaulo, //=23
+        //BLACK
+        Algiers, //=24
+        Baghdad, //=25
+        Cairo, //=26
+        Chennai, //=27
+        Delhi, //=28
+        Istanbul, //=29
+        Karachi, //=30
+        Kolkata, //=31
+        Moscow, //=32
+        Mumbai, //=33
+        Riyadh, //=34
+        Tehran, //=35
+        //RED
+        Bangkok, //=36
+        Beijing, //=37
+        HoChiMinhCity, //=38
+        HongKong, //=39
+        Jakarta, //=40
+        Manila, //=41
+        Osaka, //=42
+        Seoul, //=43
+        Shanghai, //=44
+        Sydney, //=45
+        Taipei, //=46
+        Tokyo //=47
     };
 }
 #endif //UNTITLED_CITY_H

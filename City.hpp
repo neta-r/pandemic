@@ -2,7 +2,8 @@
 #define UNTITLED_CITY_H
 
 #include <string>
-#include <unordered_map>
+#include <utility>
+#include <vector>
 #include "Color.hpp"
 
 namespace pandemic {

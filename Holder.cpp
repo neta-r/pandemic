@@ -7,10 +7,4 @@ namespace pandemic{
 
     Color Holder::get_color() { return this->c;}
 
-    Holder& Holder::addNei (City city){
-        this->nei[curr]= city;
-        curr++;
-        return *this;
-    }
-
 }

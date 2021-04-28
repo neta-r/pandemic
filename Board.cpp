@@ -10,9 +10,7 @@ namespace pandemic{
     }
 
     void Board::load_blue() {
-        Holder holder{blue,3};
-        holder.addNei(NewYork).addNei(Essen).addNei(Paris);
-        cities[Atlanta] = holder;
+        cities[Atlanta] = {blue,Chicago,Miami,Washington};
 //        cities[Chicago]=Holder(blue,pandemic::City{SanFrancisco,LosAngeles,MexicoCity,Atlanta,Montreal});
 //        cities[Essen]=Holder(blue,pandemic::City{London,Paris,Milan,StPetersburg});
 //        cities[London]=Holder(blue,pandemic::City{NewYork,Madrid,Essen,Paris});

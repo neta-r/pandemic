@@ -59,7 +59,9 @@ namespace pandemic {
         Shanghai, //=44
         Sydney, //=45
         Taipei, //=46
-        Tokyo //=47
+        Tokyo, //=47
+        //
+        nullCity //non existing city- just for the constructor
     };
 }
 #endif //UNTITLED_CITY_H

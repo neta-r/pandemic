@@ -66,12 +66,17 @@ namespace pandemic{
         cities[Taipei]=Holder(red,Shanghai,HongKong,Osaka,Manila);
         cities[Tokyo]=Holder(red,Seoul,Shanghai,Osaka,SanFrancisco);
     }
-//
-//    int& Board::operator[] (City city){ //write
-//        return this->cities[city].get_level();
-//    }
-//    int Board::operator[] (City city) const{ //read
-//        return this->cities[city].get_level();
-//    }
-//    bool Board::is_clean(){return this->num_of_diseases==0;}
+
+    int& Board::operator[] (City city){ //write
+        return cities.at(city).level;
+    }
+    const int Board::operator[] (City city) const { //read
+        return cities.at(city).level;
+    }
+    bool Board::is_clean(){
+        for (int i=0; i<cities.size(); i++){
+            if (cities[ static_cast<City>(i)].level!=0) return false;
+        }
+        return true;
+    }
 }

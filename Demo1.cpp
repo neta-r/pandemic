@@ -19,10 +19,10 @@ using namespace std;
 
 int main() {
 	Board board;  // Initialize an empty board
-//	board[City::Kinshasa] = 2;// put 2 yellow disease cubes in Kinshasa
-//	board[City::MexicoCity] = 3;    // put 3 yellow disease cubes in MexicoCity
-//	board[City::HoChiMinhCity] = 1; // put 1 red disease cube in HoChiMinhCity
-//	board[City::Chicago] = 1;      // put 1 blue disease cube in Chicago
+	board[City::Kinshasa] = 2;// put 2 yellow disease cubes in Kinshasa
+	board[City::MexicoCity] = 3;    // put 3 yellow disease cubes in MexicoCity
+	board[City::HoChiMinhCity] = 1; // put 1 red disease cube in HoChiMinhCity
+	board[City::Chicago] = 1;      // put 1 blue disease cube in Chicago
 
 //	OperationsExpert player {board, City::Atlanta};  // initialize an "operations expert" player on the given board, in Atlanta.
 //	player.take_card(City::Johannesburg)

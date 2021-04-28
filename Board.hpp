@@ -11,7 +11,6 @@ namespace pandemic{
     class Board {
     private:
         std::unordered_map<City,Holder> cities;
-        int num_of_diseases;
 
         void load_map();
         void load_blue();
@@ -23,7 +22,7 @@ namespace pandemic{
             load_map();
         }
         int& operator[] (City city); //write
-        int operator[] (City city) const; //read
+        const int operator[] (City city) const; //read
         bool is_clean();
     };
 }

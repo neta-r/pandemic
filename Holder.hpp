@@ -7,11 +7,11 @@
 namespace pandemic{
     class Holder {
     private:
-        int level;
         pandemic::Color c;
         std::vector<City> nei;
 
     public:
+        int level; //public so the operator [] could change it
         Holder() { //default constructor
             level=0;
             c=blue;
@@ -28,8 +28,6 @@ namespace pandemic{
         }
 
         void set_level(int lev);
-
-        int get_level();
 
         Color get_color();
         //bool is_nei(City city){return this->nei.}

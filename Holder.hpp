@@ -19,7 +19,7 @@ namespace pandemic{
             size=6;
         }
 
-        Holder(Color c, int size, City nei1): c(c), size(size), level(0) , curr(0){}
+        Holder(Color c, int size): c(c), size(size), level(0) , curr(0){}
 
         Holder(Holder& other){ // copy constructor
             this->level=other.level;

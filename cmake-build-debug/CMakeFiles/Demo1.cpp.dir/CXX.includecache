@@ -7,34 +7,4 @@
 #IncludeRegexTransform: 
 
 /home/neta/Desktop/pandemic/Demo2.cpp
-Board.hpp
-/home/neta/Desktop/pandemic/Board.hpp
-City.hpp
-/home/neta/Desktop/pandemic/City.hpp
-Color.hpp
-/home/neta/Desktop/pandemic/Color.hpp
-Player.hpp
-/home/neta/Desktop/pandemic/Player.hpp
-Researcher.hpp
-/home/neta/Desktop/pandemic/Researcher.hpp
-Scientist.hpp
-/home/neta/Desktop/pandemic/Scientist.hpp
-FieldDoctor.hpp
-/home/neta/Desktop/pandemic/FieldDoctor.hpp
-GeneSplicer.hpp
-/home/neta/Desktop/pandemic/GeneSplicer.hpp
-OperationsExpert.hpp
-/home/neta/Desktop/pandemic/OperationsExpert.hpp
-Dispatcher.hpp
-/home/neta/Desktop/pandemic/Dispatcher.hpp
-Medic.hpp
-/home/neta/Desktop/pandemic/Medic.hpp
-Virologist.hpp
-/home/neta/Desktop/pandemic/Virologist.hpp
-vector
--
-iostream
--
-stdexcept
--
 

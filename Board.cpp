@@ -82,7 +82,7 @@ namespace pandemic{
             ans+= "City:" + to_string(en)+ ", Amount of diseases: " + to_string(board.cities.at(en).level) + '\n';
         }
         ans+= "The cures that were discovered: \n";
-        ans+= "Research station built: \n"
+        ans+= "Research station built: \n";
 
         return os << ans;
     }
@@ -92,5 +92,9 @@ namespace pandemic{
             if (cities[ static_cast<City>(i)].level!=0) return false;
         }
         return true;
+    }
+
+    bool Board::are_neighbors(City first, City second){
+        return this->cities.at(first).is_nei(second);
     }
 }

@@ -5,10 +5,11 @@
 #ifndef UNTITLED_OPERATIONSEXPERT_H
 #define UNTITLED_OPERATIONSEXPERT_H
 
+#include "Player.hpp"
+namespace pandemic {
+    class OperationsExpert : public Player {
 
-class OperationsExpert {
-
-};
-
+    };
+}
 
 #endif //UNTITLED_OPERATIONSEXPERT_H

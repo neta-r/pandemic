@@ -5,4 +5,10 @@ namespace pandemic{
 
     Color Holder::get_color() { return this->c;}
 
+    bool Holder::is_nei(City city){
+        for (int i=0; i<nei.size(); i++){
+            if (nei.at(i)==city) return true;
+        }
+        return false;
+    }
 }

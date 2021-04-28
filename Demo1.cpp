@@ -26,12 +26,12 @@ int main() {
 
 	cout << board;
 
-//	OperationsExpert player {board, City::Atlanta};  // initialize an "operations expert" player on the given board, in Atlanta.
-//	player.take_card(City::Johannesburg)
-//	 .take_card(City::Khartoum)
-//	 .take_card(City::SaoPaulo)
-//	 .take_card(City::BuenosAires)
-//	 .take_card(City::HoChiMinhCity);
+	Player player {board, City::Atlanta};  // initialize an "operations expert" player on the given board, in Atlanta.
+	player.take_card(City::Johannesburg)
+	 .take_card(City::Khartoum)
+	 .take_card(City::SaoPaulo)
+	 .take_card(City::BuenosAires)
+	 .take_card(City::HoChiMinhCity);
 //
 //
 //	/* build action */
@@ -41,15 +41,15 @@ int main() {
 //		//       But for the OperationsExpert it is legal, since he may build a research station without a card.
 //
 //
-//	/* drive action */
-//
-//	player.drive(City::Washington);  // legal action: you drive from Atlanta to a connected city.
-//	try {
-//		player.drive(City::Madrid);  // illegal action: Madrid is not connected to Washington.
-//	} catch (const exception& ex) {
-//	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
-//	}
-//
+	/* drive action */
+
+	player.drive(City::Washington);  // legal action: you drive from Atlanta to a connected city.
+	try {
+		player.drive(City::Madrid);  // illegal action: Madrid is not connected to Washington.
+	} catch (const exception& ex) {
+	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+	}
+
 //
 //	/* fly_direct action */
 //

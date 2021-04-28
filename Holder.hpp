@@ -30,8 +30,8 @@ namespace pandemic{
         void set_level(int lev);
 
         Color get_color();
-        //bool is_nei(City city){return this->nei.}
-        // };
+
+        bool is_nei(City city);
 
     };
 }

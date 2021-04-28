@@ -18,9 +18,8 @@ namespace pandemic{
         void load_black();
         void load_red();
     public:
-        Board() {
-            load_map();
-        }
+        Board() {load_map();}
+        bool are_neighbors(City first, City second); //public so we can reach it from class Player
         int& operator[] (City city); //write
         const int operator[] (City city) const; //read
         friend std::ostream &operator<<(std::ostream &os, const Board &board);

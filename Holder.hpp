@@ -9,16 +9,40 @@ namespace pandemic{
     private:
         int level;
         pandemic::Color c;
-        std::vector<City> nei;
+        City nei[6];
+        int size; //actual size of neighbors
+        int curr; //current index to insert the nest neighbor
     public:
-        Holder(Color color, std::vector<City> &nei) : c(color), nei(nei), level(0) {}
+        Holder() { //default constructor
+            level=0;
+            c=blue;
+            size=6;
+        }
 
-        void set_level(int lev) { this->level = lev; }
+        Holder(Color c, int size, City nei1): c(c), size(size), level(0) , curr(0){}
 
-        int get_level() { return this->level; }
+        Holder(Holder& other){ // copy constructor
+            this->level=other.level;
+            this->size=other.size;
+            this->curr=other.curr;
+            for (int i=0; i<size; i++){
+                this->nei[i]= other.nei[i];
+            }
+        }
 
-        Color get_color() { return this->c; }
+        Holder& addNei (City city);
+
+        City get(int index){
+            return this->nei[index];
+        }
+
+        void set_level(int lev);
+
+        int get_level();
+
+        Color get_color();
         //bool is_nei(City city){return this->nei.}
         // };
+
     };
 }

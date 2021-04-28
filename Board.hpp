@@ -10,16 +10,21 @@
 namespace pandemic{
     class Board {
     private:
-        static std::unordered_map<City,Holder> cities;
+        std::unordered_map<City,Holder> cities;
+        int num_of_diseases;
 
-        static void load_map();
-        static void load_blue();
-        static void load_yellow();
-        static void load_black();
-        static void load_red();
+        void load_map();
+        void load_blue();
+//        static void load_yellow();
+//        static void load_black();
+//        static void load_red();
     public:
-        Board() {load_map();}
-        Board& operator[] (City city);
+        Board() {
+            load_map();
+        }
+        int& operator[] (City city); //write
+        int operator[] (City city) const; //read
+        bool is_clean();
     };
 }
 

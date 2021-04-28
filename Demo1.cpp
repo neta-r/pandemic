@@ -24,6 +24,8 @@ int main() {
 	board[City::HoChiMinhCity] = 1; // put 1 red disease cube in HoChiMinhCity
 	board[City::Chicago] = 1;      // put 1 blue disease cube in Chicago
 
+	cout << board;
+
 //	OperationsExpert player {board, City::Atlanta};  // initialize an "operations expert" player on the given board, in Atlanta.
 //	player.take_card(City::Johannesburg)
 //	 .take_card(City::Khartoum)

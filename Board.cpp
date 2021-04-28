@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include <iostream>
 using namespace std;
 namespace pandemic{
 
@@ -73,6 +74,19 @@ namespace pandemic{
     const int Board::operator[] (City city) const { //read
         return cities.at(city).level;
     }
+
+    std::ostream &operator<<(std::ostream &os, const Board &board){
+        string ans;
+        for (int i=0; i<board.cities.size(); i++){
+            auto en = static_cast<City>(i);
+            ans+= "City:" + to_string(en)+ ", Amount of diseases: " + to_string(board.cities.at(en).level) + '\n';
+        }
+        ans+= "The cures that were discovered: \n";
+        ans+= "Research station built: \n"
+
+        return os << ans;
+    }
+
     bool Board::is_clean(){
         for (int i=0; i<cities.size(); i++){
             if (cities[ static_cast<City>(i)].level!=0) return false;

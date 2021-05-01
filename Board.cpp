@@ -76,6 +76,11 @@ namespace pandemic{
         return cities[city].research_station;
     }
 
+    void Board::build(City city){
+        cities.at(city).research_station=true;
+        stations++;
+    }
+
     int& Board::operator[] (City city){ //write
         return cities.at(city).level;
     }
@@ -90,7 +95,7 @@ namespace pandemic{
             ans+= "City:" + get.city_name+ ", Amount of diseases: " + to_string(get.level) + '\n';
         }
         ans+= "The cures that were discovered: \n";
-        ans+= "Research station built: \n";
+        ans+= "Research station built: "+to_string(board.stations)+"\n";
 
         return os << ans;
     }

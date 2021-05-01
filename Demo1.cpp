@@ -32,34 +32,34 @@ int main() {
 	 .take_card(City::SaoPaulo)
 	 .take_card(City::BuenosAires)
 	 .take_card(City::HoChiMinhCity);
-//
-//
-//	/* build action */
+
+
+	/* build action */
 //
 //	player.build();  // legal action: you build a research station in Atlanta.
 //		// NOTE: you do not have the Atlanta card, so for other roles this would throw an exception.
 //		//       But for the OperationsExpert it is legal, since he may build a research station without a card.
 //
-//
+
 	/* drive action */
 
 	player.drive(City::Washington);  // legal action: you drive from Atlanta to a connected city.
 	try {
 		player.drive(City::Madrid);  // illegal action: Madrid is not connected to Washington.
 	} catch (const exception& ex) {
-	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+	 	cout << "   caught exception1: " << ex.what() << endl;  // prints a meaningful error message.
 	}
 
 
-	/* fly_direct action */
+//	/* fly_direct action */
 
 	player.fly_direct(City::Johannesburg);  // legal action: you discard the Johannesburg card and fly to Johannesburg.
 	try {
 		player.fly_direct(City::Taipei);  // illegal action: you do not have the card of Taipei.
 	} catch (const exception& ex) {
-	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+	 	cout << "   caught exception2: " << ex.what() << endl;  // prints a meaningful error message.
 	}
-//
+
 //
 //	/* treat action */
 //
@@ -89,7 +89,7 @@ int main() {
 	try {
 		player.fly_charter(City::Seoul);  // illegal action: you do not have the Sydney card (the card of the city you are in).
 	} catch (const exception& ex) {
-	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+	 	cout << "   caught exception3: " << ex.what() << endl;  // prints a meaningful error message.
 	}
 
 //
@@ -99,9 +99,9 @@ int main() {
 //	player.build();     // legal action: build a research station in LosAngeles.
 //		// NOTE: you do not have the LosAngeles card, so for other roles this would throw an exception.
 //		//       But for the OperationsExpert it is legal, since he may build a research station without a card.
-//
-//
-//
+
+
+
 //	/* fly_shuttle action */
 //
 //	player.fly_shuttle(City::Atlanta); // legal action: you fly from one research station to another.
@@ -109,9 +109,9 @@ int main() {
 //	try {
 //		player.fly_shuttle(City::Chicago); // illegal action: there is no research station in Chicago.
 //	} catch (const exception& ex) {
-//	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+//	 	cout << "   caught exception4: " << ex.what() << endl;  // prints a meaningful error message.
 //	}
-//
+
 //
 //	/* discover_cure action */
 //

@@ -3,12 +3,6 @@
 
 using namespace std;
 namespace pandemic {
-    bool Player::is_card_exist(City city) {
-        for (auto card:cards) {
-            if (card == city) return true;
-        }
-        return false;
-    }
 
     Player &Player::drive(City other) {
         if (this->board.are_neighbors(curr_city, other)) {
@@ -22,8 +16,9 @@ namespace pandemic {
     }
 
     void Player::fly(City dest_city, City card) {
-        if (is_card_exist(card)) {
+        if (cards[int(card)]) { //if card exist
             curr_city = dest_city;
+            cards[int(card)]= false;
             return;
         } else {
             string message = "You don't have a " + board.get_city_name(card) + " card!";
@@ -45,20 +40,30 @@ namespace pandemic {
         if (board.is_there_research_station(curr_city)&&board.is_there_research_station(dest_city)){
             curr_city=dest_city;
         } else if (!board.is_there_research_station(curr_city)){
-            string message = "You're current city ' " + board.get_city_name(curr_city) + " has no research station!";
+            string message = "You're current city " + board.get_city_name(curr_city) + " has no research station!";
             throw std::invalid_argument(message);
         }
         else {
-            string message = "You're dest city' " + board.get_city_name(dest_city) + " has no research station!";
+            string message = "You're dest city " + board.get_city_name(dest_city) + " has no research station!";
             throw std::invalid_argument(message);
         }
         return *this;
     }
 
-    Player &Player::take_card(City city) {
-        if (!is_card_exist(city)) { //adding card we don't already have it
-            this->cards.push_back(city);
+    void Player::build(){
+        if (cards[int(curr_city)]&&(!board.is_there_research_station(curr_city))){
+            board.build(curr_city);
+            cards[int(curr_city)]= false;
         }
+        else{
+            string message = "You don't have a  " + board.get_city_name(curr_city) + " card!";
+            throw std::invalid_argument(message);
+        }
+    }
+
+
+    Player &Player::take_card(City city) {
+        cards[int(city)]= true;
         return *this;
     }
 

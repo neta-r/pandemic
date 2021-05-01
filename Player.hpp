@@ -9,15 +9,14 @@ namespace pandemic {
     class Player {
     private:
         City curr_city;
-        std::vector<City> cards;
+        bool cards[48];
         Board board;
-
-        bool is_card_exist(City city);
 
         void fly(City dest_city, City card);
 
     public:
         Player(Board board, City curr) {
+            for (int i=0; i < 49 ; i++) cards[i]= false;
             this->board = board;
             this->curr_city = curr;
         }
@@ -31,6 +30,8 @@ namespace pandemic {
         Player &fly_charter(City dest_city);
 
         Player &fly_shuttle(City dest_city);
+
+        void build();
 
         void discover_cure(Color color);
     };

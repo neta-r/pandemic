@@ -68,6 +68,14 @@ namespace pandemic{
         cities[Tokyo]=Holder(red,"Tokyo",Seoul,Shanghai,Osaka,SanFrancisco);
     }
 
+    string Board::get_city_name (City city){
+        return cities.at(city).city_name;
+    }
+
+    bool Board::is_there_research_station(City city){
+        return cities[city].research_station;
+    }
+
     int& Board::operator[] (City city){ //write
         return cities.at(city).level;
     }

@@ -11,15 +11,27 @@ namespace pandemic {
         City curr_city;
         std::vector<City> cards;
         Board board;
+
         bool is_card_exist(City city);
 
+        void fly(City dest_city, City card);
+
     public:
-        Player (Board board, City curr){
-            this->board=board;
-            this->curr_city=curr;
+        Player(Board board, City curr) {
+            this->board = board;
+            this->curr_city = curr;
         }
+
         Player &take_card(City city);
-        void drive(City other);
+
+        Player &drive(City other);
+
+        Player &fly_direct(City dest_city);
+
+        Player &fly_charter(City dest_city);
+
+        Player &fly_shuttle(City dest_city);
+
         void discover_cure(Color color);
     };
 }

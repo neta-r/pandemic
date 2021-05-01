@@ -50,15 +50,15 @@ int main() {
 	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
 	}
 
-//
-//	/* fly_direct action */
-//
-//	player.fly_direct(City::Johannesburg);  // legal action: you discard the Johannesburg card and fly to Johannesburg.
-//	try {
-//		player.fly_direct(City::Taipei);  // illegal action: you do not have the card of Taipei.
-//	} catch (const exception& ex) {
-//	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
-//	}
+
+	/* fly_direct action */
+
+	player.fly_direct(City::Johannesburg);  // legal action: you discard the Johannesburg card and fly to Johannesburg.
+	try {
+		player.fly_direct(City::Taipei);  // illegal action: you do not have the card of Taipei.
+	} catch (const exception& ex) {
+	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+	}
 //
 //
 //	/* treat action */
@@ -81,17 +81,17 @@ int main() {
 //	}
 //
 //
-//	/* fly_charter action */
-//
-//	player.drive(City::Khartoum)
-//	 .fly_charter(City::Sydney);  // legal action: you discard the Khartoum card and fly to Sydney.
-//
-//	try {
-//		player.fly_charter(City::Seoul);  // illegal action: you do not have the Sydney card (the card of the city you are in).
-//	} catch (const exception& ex) {
-//	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
-//	}
-//
+	/* fly_charter action */
+
+	player.drive(City::Khartoum)
+	 .fly_charter(City::Sydney);  // legal action: you discard the Khartoum card and fly to Sydney.
+
+	try {
+		player.fly_charter(City::Seoul);  // illegal action: you do not have the Sydney card (the card of the city you are in).
+	} catch (const exception& ex) {
+	 	cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+	}
+
 //
 //	/* build action */
 //

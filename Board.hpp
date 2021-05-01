@@ -19,6 +19,8 @@ namespace pandemic{
         void load_red();
     public:
         Board() {load_map();}
+        std::string get_city_name (City city); //to be able to print it in player class
+        bool is_there_research_station(City city); //for build and fly_shuttle
         bool are_neighbors(City first, City second); //public so we can reach it from class Player
         int& operator[] (City city); //write
         const int operator[] (City city) const; //read

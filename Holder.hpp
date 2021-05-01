@@ -10,11 +10,13 @@ namespace pandemic{
         pandemic::Color c;
         std::vector<City> nei;
         std::string city_name;
+        bool research_station;
         int level; //public so the operator [] could change it
         Holder() { //default constructor
             city_name="";
             level=0;
             c=blue;
+            research_station= false;
             nei= std::vector<City>();
         }
         Holder(Color c,std::string name, City nei1=nullCity, City nei2=nullCity, City nei3=nullCity,

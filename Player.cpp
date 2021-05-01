@@ -67,5 +67,17 @@ namespace pandemic {
         return *this;
     }
 
-    void Player::discover_cure(Color color) {};
+    void Player::discover_cure(Color color) {
+        if (board.get_city_color(curr_city)!=color){
+            string message = "You're not in a " + to_string(color) + " city!"; //TODO:convert it to string and not to int
+            throw std::invalid_argument(message);
+        }
+        if (board.is_there_research_station(curr_city)){
+
+        }
+        else{
+            string message = "You're current city " + board.get_city_name(curr_city) + " doesn't have a research station!";
+            throw std::invalid_argument(message);
+        }
+    };
 }

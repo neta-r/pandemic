@@ -11,15 +11,20 @@ namespace pandemic{
     class Board {
     private:
         std::unordered_map<City,Holder> cities;
-        int stations;
+        int stations; //number of research stations built
         void load_map();
         void load_blue();
         void load_yellow();
         void load_black();
         void load_red();
     public:
-        Board() {load_map();}
+        bool blue_cure;
+        bool yellow_cure;
+        bool black_cure;
+        bool red_cure;
+        Board(): stations(0), blue_cure(false), yellow_cure(false), black_cure(false), red_cure(false) {load_map();}
         std::string get_city_name (City city); //to be able to print it in player class
+        Color get_city_color (City city);
         bool is_there_research_station(City city); //for build and fly_shuttle
         void build(City city);
         bool are_neighbors(City first, City second); //public so we can reach it from class Player

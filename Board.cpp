@@ -72,6 +72,10 @@ namespace pandemic{
         return cities.at(city).city_name;
     }
 
+    Color Board::get_city_color (City city){
+        return cities.at(city).c;
+    }
+
     bool Board::is_there_research_station(City city){
         return cities[city].research_station;
     }

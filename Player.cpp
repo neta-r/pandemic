@@ -4,12 +4,12 @@
 using namespace std;
 namespace pandemic {
 
-    bool Player::removeFiveCards(int indexStart, int indexEnd) {
+    bool Player::removeCards(int indexStart, int indexEnd, int n) {
         int counter = 0;
-        for (int i = indexStart; i < indexEnd && counter != 5; i++) {
+        for (int i = indexStart; i < indexEnd && counter != n; i++) {
             if (cards[i]) counter++;
         }
-        if (counter < 5) return false;
+        if (counter < n) return false;
         for (int i = indexStart; i < indexEnd && counter > 0; i++) {
             if (cards[i]) {
                 cards[i] = false;
@@ -86,19 +86,19 @@ namespace pandemic {
             switch (color) {
                 case Blue:
                     if (board.blue_cure) return; //If blue cure exists we won't take the cards
-                    board.blue_cure = res = removeFiveCards(0, 12);
+                    board.blue_cure = res = removeCards(0, 12, 5);
                     break;
                 case Yellow:
                     if (board.yellow_cure) return; //If yellow cure exists we won't take the cards
-                    board.yellow_cure = res = removeFiveCards(12, 24);
+                    board.yellow_cure = res = removeCards(12, 24, 5);
                     break;
                 case Black:
                     if (board.black_cure) return; //If black cure exists we won't take the cards
-                    board.blue_cure = res = removeFiveCards(24, 36);
+                    board.blue_cure = res = removeCards(24, 36, 5);
                     break;
                 case Red:
                     if (board.red_cure) return; //If red cure exists we won't take the cards
-                    board.red_cure = res = removeFiveCards(36, 48);
+                    board.red_cure = res = removeCards(36, 48, 5);
                     break;
             }
             if (!res) {
@@ -112,7 +112,12 @@ namespace pandemic {
         }
     }
 
-    void Player::treat(City city) {
+    Player &Player::treat(City city) {
+        if (city != curr_city) {
+            string message =
+                    "You have to be in the city in order to treat it!";
+            throw std::invalid_argument(message);
+        }
         Color c = board.get_city_color(city);
         if (board.get_city_level(city) == 0) {
             string message =
@@ -149,5 +154,6 @@ namespace pandemic {
                 }
                 break;
         }
+        return *this;
     }
 }

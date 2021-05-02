@@ -5,10 +5,16 @@
 #ifndef UNTITLED_SCIENTIST_H
 #define UNTITLED_SCIENTIST_H
 
-
-class Scientist {
-
-};
+#include "Player.hpp"
+namespace pandemic {
+    class Scientist : public Player {
+        int number_of_cards;
+    public:
+        Scientist(Board board, City city, int n): Player(board, city), number_of_cards(n){}
+        void build();
+        std::string role();
+    };
+}
 
 
 #endif //UNTITLED_SCIENTIST_H

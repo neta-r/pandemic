@@ -3,22 +3,20 @@
 
 #include "City.hpp"
 #include "Board.hpp"
-#include <vector>
 
 namespace pandemic {
     class Player {
     protected:
+        Board& board;
         City curr_city;
         bool cards[48];
-        Board board;
         bool removeCards(int indexStart, int indexEnd, int n);
         void fly(City dest_city, City card);
 
     public:
-        Player(Board board, City curr) {
+        Player(Board& board, City curr): board(board) {
             for (int i=0; i < 49 ; i++) cards[i]= false;
-            this->board = board;
-            this->curr_city = curr;
+            curr_city=curr;
         }
 
         Player &take_card(City city);

@@ -10,7 +10,7 @@ namespace pandemic {
     private:
         void remove_all_diseases(int indexStart, int indexEnd);
     public:
-        Medic(Board board, City city): Player(board, city){}
+        Medic(Board& board, City city): Player(board, city){}
         Player & treat(City city);
         void discover_cure(Color color);
         std::string role();

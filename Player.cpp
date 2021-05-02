@@ -81,7 +81,7 @@ namespace pandemic {
     }
 
     void Player::discover_cure(Color color) {
-        if (!board.is_there_research_station(curr_city)) {
+        if (board.is_there_research_station(curr_city)) {
             bool res;
             switch (color) {
                 case Blue:

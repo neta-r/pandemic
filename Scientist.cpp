@@ -7,8 +7,8 @@
 
 using namespace std;
 namespace pandemic {
-    voidvoid Scientist::discover_cure(Color color) {
-        if (!board.is_there_research_station(curr_city)) {
+    void Scientist::discover_cure(Color color) {
+        if (board.is_there_research_station(curr_city)) {
             bool res;
             switch (color) {
                 case Blue:
@@ -38,7 +38,8 @@ namespace pandemic {
             throw std::invalid_argument(message);
         }
     }
-    string Scientist::role(){
+
+    string Scientist::role() {
         return "Scientist";
     }
 }

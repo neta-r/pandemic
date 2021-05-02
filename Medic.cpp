@@ -8,7 +8,7 @@ using namespace std;
 namespace pandemic {
     void Medic::remove_all_diseases(int indexStart, int indexEnd){
         for (int i = indexStart; i < indexEnd; i++) {
-            board.reduce_city_level_by_all(cards[i]);
+            board.reduce_city_level_by_all(static_cast<City>(i));
         }
     }
 

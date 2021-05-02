@@ -15,7 +15,7 @@ namespace pandemic{
         Holder() { //default constructor
             city_name="";
             level=0;
-            c=blue;
+            c=Blue;
             research_station= false;
             nei= std::vector<City>();
         }

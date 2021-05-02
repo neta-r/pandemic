@@ -11,7 +11,7 @@ namespace pandemic {
         City curr_city;
         bool cards[48];
         Board board;
-
+        bool removeFiveCards(int indexStart, int indexEnd);
         void fly(City dest_city, City card);
 
     public:
@@ -34,6 +34,8 @@ namespace pandemic {
         void build();
 
         void discover_cure(Color color);
+
+        void treat(City city);
     };
 }
 

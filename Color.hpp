@@ -7,10 +7,10 @@
 
 namespace pandemic {
     enum Color {
-        blue, //=0
-        yellow, //=1
-        black, //=2
-        red //=3
+        Blue, //=0
+        Yellow, //=1
+        Black, //=2
+        Red //=3
     };
 }
 #endif //UNTITLED_COLOR_H

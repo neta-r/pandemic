@@ -4,6 +4,21 @@
 using namespace std;
 namespace pandemic {
 
+    bool Player::removeFiveCards(int indexStart, int indexEnd) {
+        int counter = 0;
+        for (int i = indexStart; i < indexEnd && counter != 5; i++) {
+            if (cards[i]) counter++;
+        }
+        if (counter < 5) return false;
+        for (int i = indexStart; i < indexEnd && counter > 0; i++) {
+            if (cards[i]) {
+                cards[i] = false;
+                counter--;
+            }
+        }
+        return true;
+    }
+
     Player &Player::drive(City other) {
         if (this->board.are_neighbors(curr_city, other)) {
             curr_city = other;
@@ -18,7 +33,7 @@ namespace pandemic {
     void Player::fly(City dest_city, City card) {
         if (cards[int(card)]) { //if card exist
             curr_city = dest_city;
-            cards[int(card)]= false;
+            cards[int(card)] = false;
             return;
         } else {
             string message = "You don't have a " + board.get_city_name(card) + " card!";
@@ -37,25 +52,23 @@ namespace pandemic {
     }
 
     Player &Player::fly_shuttle(City dest_city) {
-        if (board.is_there_research_station(curr_city)&&board.is_there_research_station(dest_city)){
-            curr_city=dest_city;
-        } else if (!board.is_there_research_station(curr_city)){
+        if (board.is_there_research_station(curr_city) && board.is_there_research_station(dest_city)) {
+            curr_city = dest_city;
+        } else if (!board.is_there_research_station(curr_city)) {
             string message = "You're current city " + board.get_city_name(curr_city) + " has no research station!";
             throw std::invalid_argument(message);
-        }
-        else {
+        } else {
             string message = "You're dest city " + board.get_city_name(dest_city) + " has no research station!";
             throw std::invalid_argument(message);
         }
         return *this;
     }
 
-    void Player::build(){
-        if (cards[int(curr_city)]&&(!board.is_there_research_station(curr_city))){
+    void Player::build() {
+        if (cards[int(curr_city)] && (!board.is_there_research_station(curr_city))) {
             board.build(curr_city);
-            cards[int(curr_city)]= false;
-        }
-        else{
+            cards[int(curr_city)] = false;
+        } else {
             string message = "You don't have a  " + board.get_city_name(curr_city) + " card!";
             throw std::invalid_argument(message);
         }
@@ -63,21 +76,78 @@ namespace pandemic {
 
 
     Player &Player::take_card(City city) {
-        cards[int(city)]= true;
+        cards[int(city)] = true;
         return *this;
     }
 
     void Player::discover_cure(Color color) {
-        if (board.get_city_color(curr_city)!=color){
-            string message = "You're not in a " + to_string(color) + " city!"; //TODO:convert it to string and not to int
+        if (!board.is_there_research_station(curr_city)) {
+            bool res;
+            switch (color) {
+                case Blue:
+                    if (board.blue_cure) return; //If blue cure exists we won't take the cards
+                    board.blue_cure = res = removeFiveCards(0, 12);
+                    break;
+                case Yellow:
+                    if (board.yellow_cure) return; //If yellow cure exists we won't take the cards
+                    board.yellow_cure = res = removeFiveCards(12, 24);
+                    break;
+                case Black:
+                    if (board.black_cure) return; //If black cure exists we won't take the cards
+                    board.blue_cure = res = removeFiveCards(24, 36);
+                    break;
+                case Red:
+                    if (board.red_cure) return; //If red cure exists we won't take the cards
+                    board.red_cure = res = removeFiveCards(36, 48);
+                    break;
+            }
+            if (!res) {
+                string message = "You don't have 5 cards!";
+                throw std::invalid_argument(message);
+            }
+        } else {
+            string message =
+                    "You're current city " + board.get_city_name(curr_city) + " doesn't have a research station!";
             throw std::invalid_argument(message);
         }
-        if (board.is_there_research_station(curr_city)){
+    }
 
-        }
-        else{
-            string message = "You're current city " + board.get_city_name(curr_city) + " doesn't have a research station!";
+    void Player::treat(City city) {
+        Color c = board.get_city_color(city);
+        if (board.get_city_level(city) == 0) {
+            string message =
+                    "Current city's level of disease is 0!";
             throw std::invalid_argument(message);
         }
-    };
+        switch (c) {
+            case Blue:
+                if (!board.blue_cure) {
+                    board.reduce_city_level_by_one(city);
+                } else {
+                    board.reduce_city_level_by_all(city);
+                }
+                break;
+            case Yellow:
+                if (!board.yellow_cure) {
+                    board.reduce_city_level_by_one(city);
+                } else {
+                    board.reduce_city_level_by_all(city);
+                }
+                break;
+            case Black:
+                if (!board.black_cure) {
+                    board.reduce_city_level_by_one(city);
+                } else {
+                    board.reduce_city_level_by_all(city);
+                }
+                break;
+            case Red:
+                if (!board.red_cure) {
+                    board.reduce_city_level_by_one(city);
+                } else {
+                    board.reduce_city_level_by_all(city);
+                }
+                break;
+        }
+    }
 }

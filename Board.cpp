@@ -12,60 +12,60 @@ namespace pandemic{
 
 
     void Board::load_blue() {
-        cities[Atlanta] =Holder (blue,"Atlanta", Chicago,Miami,Washington);
-        cities[Chicago]=Holder(blue,"Chicago", SanFrancisco,LosAngeles,MexicoCity,Atlanta,Montreal);
-        cities[Essen]=Holder(blue,"Essen" ,London,Paris,Milan,StPetersburg);
-        cities[London]=Holder(blue,"London", NewYork,Madrid,Essen,Paris);
-        cities[Madrid]=Holder(blue,"Madrid",London,NewYork,Paris,SaoPaulo,Algiers);
-        cities[Milan]=Holder(blue,"Milan", Essen,Paris,Istanbul);
-        cities[Montreal]=Holder(blue,"Montreal",Chicago,Washington,NewYork);
-        cities[NewYork]=Holder(blue,"NewYork", Montreal,Washington,London,Madrid);
-        cities[Paris]=Holder(blue,"Paris",Algiers,Essen,Madrid,Milan,London);
-        cities[SanFrancisco]=Holder(blue,"SanFrancisco",LosAngeles,Chicago,Tokyo,Manila);
-        cities[StPetersburg]=Holder(blue,"StPetersburg",Essen,Istanbul,Moscow);
-        cities[Washington]=Holder(blue,"Washington",Atlanta,NewYork,Montreal,Miami);
+        cities[Atlanta] =Holder (Blue,"Atlanta", Chicago,Miami,Washington);
+        cities[Chicago]=Holder(Blue,"Chicago", SanFrancisco,LosAngeles,MexicoCity,Atlanta,Montreal);
+        cities[Essen]=Holder(Blue,"Essen" ,London,Paris,Milan,StPetersburg);
+        cities[London]=Holder(Blue,"London", NewYork,Madrid,Essen,Paris);
+        cities[Madrid]=Holder(Blue,"Madrid",London,NewYork,Paris,SaoPaulo,Algiers);
+        cities[Milan]=Holder(Blue,"Milan", Essen,Paris,Istanbul);
+        cities[Montreal]=Holder(Blue,"Montreal",Chicago,Washington,NewYork);
+        cities[NewYork]=Holder(Blue,"NewYork", Montreal,Washington,London,Madrid);
+        cities[Paris]=Holder(Blue,"Paris",Algiers,Essen,Madrid,Milan,London);
+        cities[SanFrancisco]=Holder(Blue,"SanFrancisco",LosAngeles,Chicago,Tokyo,Manila);
+        cities[StPetersburg]=Holder(Blue,"StPetersburg",Essen,Istanbul,Moscow);
+        cities[Washington]=Holder(Blue,"Washington",Atlanta,NewYork,Montreal,Miami);
     }
     void Board::load_yellow() {
-        cities[Bogota]=Holder(yellow,"Bogota",MexicoCity,Lima,Miami,SaoPaulo,BuenosAires);
-        cities[BuenosAires]=Holder(yellow,"BuenosAires",Bogota,SaoPaulo);
-        cities[Johannesburg]=Holder(yellow,"Johannesburg",Kinshasa,Khartoum);
-        cities[Khartoum]=Holder(yellow,"Khartoum",Lagos,Kinshasa,Johannesburg);
-        cities[Kinshasa]=Holder(yellow,"Kinshasa",Lagos,Khartoum,Johannesburg);
-        cities[Lagos]=Holder(yellow,"Lagos",SaoPaulo,Khartoum,Kinshasa);
-        cities[Lima]=Holder(yellow,"Lima",MexicoCity,Bogota,Santiago);
-        cities[LosAngeles]=Holder(yellow,"LosAngeles",SanFrancisco,Chicago,MexicoCity,Sydney);
-        cities[MexicoCity]=Holder(yellow,"MexicoCity",LosAngeles,Chicago,Miami,Lima,Bogota);
-        cities[Miami]=Holder(yellow,"Miami",Atlanta,MexicoCity,Washington,Bogota);
-        cities[Santiago]=Holder(yellow,"Santiago",Lima);
-        cities[SaoPaulo]=Holder(yellow,"SaoPaulo",Bogota,BuenosAires,Lagos,Madrid);
+        cities[Bogota]=Holder(Yellow,"Bogota",MexicoCity,Lima,Miami,SaoPaulo,BuenosAires);
+        cities[BuenosAires]=Holder(Yellow,"BuenosAires",Bogota,SaoPaulo);
+        cities[Johannesburg]=Holder(Yellow,"Johannesburg",Kinshasa,Khartoum);
+        cities[Khartoum]=Holder(Yellow,"Khartoum",Lagos,Kinshasa,Johannesburg);
+        cities[Kinshasa]=Holder(Yellow,"Kinshasa",Lagos,Khartoum,Johannesburg);
+        cities[Lagos]=Holder(Yellow,"Lagos",SaoPaulo,Khartoum,Kinshasa);
+        cities[Lima]=Holder(Yellow,"Lima",MexicoCity,Bogota,Santiago);
+        cities[LosAngeles]=Holder(Yellow,"LosAngeles",SanFrancisco,Chicago,MexicoCity,Sydney);
+        cities[MexicoCity]=Holder(Yellow,"MexicoCity",LosAngeles,Chicago,Miami,Lima,Bogota);
+        cities[Miami]=Holder(Yellow,"Miami",Atlanta,MexicoCity,Washington,Bogota);
+        cities[Santiago]=Holder(Yellow,"Santiago",Lima);
+        cities[SaoPaulo]=Holder(Yellow,"SaoPaulo",Bogota,BuenosAires,Lagos,Madrid);
     }
     void Board::load_black() {
-        cities[Algiers]=Holder(black,"Algiers",Madrid,Paris,Istanbul,Cairo);
-        cities[Baghdad]=Holder(black,"Baghdad",Tehran,Istanbul,Cairo,Riyadh,Karachi);
-        cities[Cairo]=Holder(black,"Cairo",Algiers,Istanbul,Baghdad,Khartoum,Riyadh);
-        cities[Chennai]=Holder(black,"Chennai",Mumbai,Delhi,Kolkata,Bangkok,Jakarta);
-        cities[Delhi]=Holder(black,"Delhi",Tehran,Karachi,Mumbai,Chennai,Kolkata);
-        cities[Istanbul]=Holder(black,"Istanbul",Milan,Algiers,StPetersburg,Cairo,Baghdad,Moscow);
-        cities[Karachi]=Holder(black,"Karachi",Tehran,Baghdad,Riyadh,Mumbai,Delhi);
-        cities[Kolkata]=Holder(black,"Kolkata",Delhi,Chennai,Bangkok,HongKong);
-        cities[Moscow]=Holder(black,"Moscow",StPetersburg,Istanbul,Tehran);
-        cities[Mumbai]=Holder(black,"Mumbai",Karachi,Delhi,Chennai);
-        cities[Riyadh]=Holder(black,"Riyadh",Baghdad,Cairo,Karachi);
-        cities[Tehran]=Holder(black,"Tehran",Baghdad,Moscow,Karachi,Delhi);
+        cities[Algiers]=Holder(Black,"Algiers",Madrid,Paris,Istanbul,Cairo);
+        cities[Baghdad]=Holder(Black,"Baghdad",Tehran,Istanbul,Cairo,Riyadh,Karachi);
+        cities[Cairo]=Holder(Black,"Cairo",Algiers,Istanbul,Baghdad,Khartoum,Riyadh);
+        cities[Chennai]=Holder(Black,"Chennai",Mumbai,Delhi,Kolkata,Bangkok,Jakarta);
+        cities[Delhi]=Holder(Black,"Delhi",Tehran,Karachi,Mumbai,Chennai,Kolkata);
+        cities[Istanbul]=Holder(Black,"Istanbul",Milan,Algiers,StPetersburg,Cairo,Baghdad,Moscow);
+        cities[Karachi]=Holder(Black,"Karachi",Tehran,Baghdad,Riyadh,Mumbai,Delhi);
+        cities[Kolkata]=Holder(Black,"Kolkata",Delhi,Chennai,Bangkok,HongKong);
+        cities[Moscow]=Holder(Black,"Moscow",StPetersburg,Istanbul,Tehran);
+        cities[Mumbai]=Holder(Black,"Mumbai",Karachi,Delhi,Chennai);
+        cities[Riyadh]=Holder(Black,"Riyadh",Baghdad,Cairo,Karachi);
+        cities[Tehran]=Holder(Black,"Tehran",Baghdad,Moscow,Karachi,Delhi);
     }
     void Board::load_red() {
-        cities[Bangkok]=Holder(red,"Bangkok",Kolkata,Chennai,Jakarta,HoChiMinhCity,HongKong);
-        cities[Beijing]=Holder(red,"Beijing",Shanghai,Seoul);
-        cities[HoChiMinhCity]=Holder(red,"HoChiMinhCity",Jakarta,Bangkok,HongKong,Manila);
-        cities[HongKong]=Holder(red,"HongKong",Bangkok,Kolkata,HoChiMinhCity,Shanghai,Manila,Taipei);
-        cities[Jakarta]=Holder(red,"Jakarta",Chennai,Bangkok,HoChiMinhCity,Sydney);
-        cities[Manila]=Holder(red,"Manila",Taipei,SanFrancisco,HoChiMinhCity,Sydney);
-        cities[Osaka]=Holder(red,"Osaka",Taipei,Tokyo);
-        cities[Seoul]=Holder(red,"Seoul",Beijing,Shanghai,Tokyo);
-        cities[Shanghai]=Holder(red,"Shanghai",Beijing,HongKong,Taipei,Seoul,Tokyo);
-        cities[Sydney]=Holder(red,"Sydney",Jakarta,Manila,LosAngeles);
-        cities[Taipei]=Holder(red,"Taipei",Shanghai,HongKong,Osaka,Manila);
-        cities[Tokyo]=Holder(red,"Tokyo",Seoul,Shanghai,Osaka,SanFrancisco);
+        cities[Bangkok]=Holder(Red,"Bangkok",Kolkata,Chennai,Jakarta,HoChiMinhCity,HongKong);
+        cities[Beijing]=Holder(Red,"Beijing",Shanghai,Seoul);
+        cities[HoChiMinhCity]=Holder(Red,"HoChiMinhCity",Jakarta,Bangkok,HongKong,Manila);
+        cities[HongKong]=Holder(Red,"HongKong",Bangkok,Kolkata,HoChiMinhCity,Shanghai,Manila,Taipei);
+        cities[Jakarta]=Holder(Red,"Jakarta",Chennai,Bangkok,HoChiMinhCity,Sydney);
+        cities[Manila]=Holder(Red,"Manila",Taipei,SanFrancisco,HoChiMinhCity,Sydney);
+        cities[Osaka]=Holder(Red,"Osaka",Taipei,Tokyo);
+        cities[Seoul]=Holder(Red,"Seoul",Beijing,Shanghai,Tokyo);
+        cities[Shanghai]=Holder(Red,"Shanghai",Beijing,HongKong,Taipei,Seoul,Tokyo);
+        cities[Sydney]=Holder(Red,"Sydney",Jakarta,Manila,LosAngeles);
+        cities[Taipei]=Holder(Red,"Taipei",Shanghai,HongKong,Osaka,Manila);
+        cities[Tokyo]=Holder(Red,"Tokyo",Seoul,Shanghai,Osaka,SanFrancisco);
     }
 
     string Board::get_city_name (City city){
@@ -74,6 +74,18 @@ namespace pandemic{
 
     Color Board::get_city_color (City city){
         return cities.at(city).c;
+    }
+
+    int Board::get_city_level (City city){
+        return cities.at(city).level;
+    }
+
+    void Board::reduce_city_level_by_one(City city) {
+        cities.at(city).level--;
+    }
+
+    void Board::reduce_city_level_by_all(City city) {
+        cities.at(city).level=0;
     }
 
     bool Board::is_there_research_station(City city){
@@ -98,7 +110,18 @@ namespace pandemic{
             Holder get = board.cities.at(static_cast<City>(i));
             ans+= "City:" + get.city_name+ ", Amount of diseases: " + to_string(get.level) + '\n';
         }
-        ans+= "The cures that were discovered: \n";
+        if (board.blue_cure){
+            ans+="blue cure has been discovered!";
+        }
+        if (board.yellow_cure){
+            ans+="yellow cure has been discovered!";
+        }
+        if (board.black_cure){
+            ans+="black cure has been discovered!";
+        }
+        if (board.red_cure){
+            ans+="red cure has been discovered!";
+        }
         ans+= "Research station built: "+to_string(board.stations)+"\n";
 
         return os << ans;

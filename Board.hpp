@@ -25,6 +25,9 @@ namespace pandemic{
         Board(): stations(0), blue_cure(false), yellow_cure(false), black_cure(false), red_cure(false) {load_map();}
         std::string get_city_name (City city); //to be able to print it in player class
         Color get_city_color (City city);
+        int get_city_level (City city);
+        void reduce_city_level_by_one(City city);
+        void reduce_city_level_by_all(City city);
         bool is_there_research_station(City city); //for build and fly_shuttle
         void build(City city);
         bool are_neighbors(City first, City second); //public so we can reach it from class Player

@@ -130,6 +130,17 @@ void take_different_cards() {
     fieldDoctor.take_card(Santiago);
 }
 
+void clear_all(){
+    operationsExpert.clear_all();
+    dispatcher.clear_all();
+    scientist.clear_all();
+    researcher.clear_all();
+    medic.clear_all();
+    virologist.clear_all();
+    geneSplicer.clear_all();
+    fieldDoctor.clear_all();
+}
+
 void all_print_location() { //TODO:remove it later
     cout << operationsExpert.role() << "is in " << operationsExpert.get_location() << endl;
     cout << dispatcher.role() << "is in " << dispatcher.get_location() << endl;
@@ -372,6 +383,60 @@ TEST_CASE ("build") {
             CHECK_THROWS(fieldDoctor.build());
 }
 
-TEST_CASE ("discover cure") {
-
+void able_to_discover_regular (City one, City two, City three, City four, City five, Color color){
+    all_take_card(one);
+    all_take_card(two);
+    all_take_card(three);
+    all_take_card(four);
+    all_take_card(five);
+            CHECK_NOTHROW(operationsExpert.discover_cure(color));
+    board.remove_cures();
+            CHECK_NOTHROW(dispatcher.discover_cure(color));
+    board.remove_cures();
+            CHECK_NOTHROW(scientist.discover_cure(color));
+    board.remove_cures();
+            CHECK_NOTHROW(medic.discover_cure(color));
+    board.remove_cures();
+            CHECK_NOTHROW(virologist.discover_cure(color));
+    board.remove_cures();
+            CHECK_NOTHROW(geneSplicer.discover_cure(color));
+    board.remove_cures();
+            CHECK_NOTHROW(fieldDoctor.discover_cure(color));
+    board.remove_cures();
 }
+
+void able_to_discover_mixed_color (City one, City two, City three, City four, City five, Color color){
+    all_take_card(one);
+    all_take_card(two);
+    all_take_card(three);
+    all_take_card(four);
+    all_take_card(five);
+    //Only GeneSplicer able to
+            CHECK_THROWS(operationsExpert.discover_cure(color));
+            CHECK_THROWS(dispatcher.discover_cure(color));
+            CHECK_THROWS(scientist.discover_cure(color));
+            CHECK_THROWS(medic.discover_cure(color));
+            CHECK_THROWS(virologist.discover_cure(color));
+            CHECK_NOTHROW(geneSplicer.discover_cure(color));
+    board.remove_cures();
+            CHECK_THROWS(fieldDoctor.discover_cure(color));
+}
+
+TEST_CASE ("discover cure") {
+    clear_all();
+    //all in Algiers a city with a research station
+    //able to discover blue cure
+    able_to_discover_regular(SanFrancisco,Chicago,Montreal,NewYork,Washington,Blue);
+    //able to discover yellow cure
+    able_to_discover_regular(SaoPaulo,Bogota,Miami,MexicoCity,Santiago,Yellow);
+    //able to discover black cure
+    able_to_discover_regular(Moscow,Baghdad,Tehran,Chennai,Mumbai,Black);
+    //able to discover red cure
+    able_to_discover_regular(Sydney,Manila,Osaka,Taipei,Bangkok,Red);
+    clear_all();
+    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Blue);
+    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Yellow);
+    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Black);
+    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Red);
+}
+

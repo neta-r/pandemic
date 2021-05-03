@@ -30,6 +30,8 @@ namespace pandemic {
             return ans;
         }
 
+        void clear_all();
+
         virtual Player &take_card(City city);
 
         virtual Player &drive(City other);

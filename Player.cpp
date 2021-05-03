@@ -165,4 +165,10 @@ namespace pandemic {
     string Player::role() {
         return "Player";
     }
+
+    void Player::clear_all() {
+        for (int i=0; i<49; i++){
+            cards[i]= false;
+        }
+    }
 }

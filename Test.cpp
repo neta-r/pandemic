@@ -91,16 +91,43 @@ void all_take_card(City city) {
     fieldDoctor.take_card(city);
 }
 
-void all_get_to(City city) {
-    all_take_card(city);
-    operationsExpert.fly_direct(city);
-    dispatcher.fly_direct(city);
-    scientist.fly_direct(city);
-    researcher.fly_direct(city);
-    medic.fly_direct(city);
-    virologist.fly_direct(city);
-    geneSplicer.fly_direct(city);
-    fieldDoctor.fly_direct(city);
+void get_to(Player &p, City curr, City dest) {
+    p.take_card(curr);
+    p.fly_charter(dest);
+}
+
+void all_get_to(City curr, City dest) {
+    all_take_card(curr);
+    operationsExpert.fly_charter(dest);
+    dispatcher.fly_charter(dest);
+    scientist.fly_charter(dest);
+    researcher.fly_charter(dest);
+    medic.fly_charter(dest);
+    virologist.fly_charter(dest);
+    geneSplicer.fly_charter(dest);
+    fieldDoctor.fly_charter(dest);
+}
+
+void spread(City common_curr_city) {
+    get_to(operationsExpert, common_curr_city, BuenosAires);
+    get_to(dispatcher, common_curr_city, Istanbul);
+    get_to(scientist, common_curr_city, Paris);
+    get_to(researcher, common_curr_city, Mumbai);
+    get_to(medic, common_curr_city, Sydney);
+    get_to(virologist, common_curr_city, Essen);
+    get_to(geneSplicer, common_curr_city, SanFrancisco);
+    get_to(fieldDoctor, common_curr_city, Santiago);
+}
+
+void take_different_cards() {
+    operationsExpert.take_card(BuenosAires);
+    dispatcher.take_card(Istanbul);
+    scientist.take_card(Paris);
+    researcher.take_card(Mumbai);
+    medic.take_card(Sydney);
+    virologist.take_card(Essen);
+    geneSplicer.take_card(SanFrancisco);
+    fieldDoctor.take_card(Santiago);
 }
 
 void all_print_location() { //TODO:remove it later
@@ -211,10 +238,13 @@ TEST_CASE ("fly_direct") {
             CHECK_NOTHROW(virologist.fly_direct(Madrid));
             CHECK_NOTHROW(geneSplicer.fly_direct(Madrid));
             CHECK_NOTHROW(fieldDoctor.fly_direct(Madrid));
+    //let's bring dispatcher back to Madrid
+    dispatcher.take_card(Madrid);
+    dispatcher.fly_direct(Madrid);
 }
 
 TEST_CASE ("fly_charter") {
-    all_get_to(Beijing);
+    all_get_to(Madrid, Beijing);
     //all now in Beijing
     all_take_card(Beijing);
     //able to fly charter to Beijing
@@ -269,7 +299,7 @@ TEST_CASE ("fly_shuttle") {
             CHECK_THROWS(virologist.fly_shuttle(Lagos));
             CHECK_THROWS(geneSplicer.fly_shuttle(Lagos));
             CHECK_THROWS(fieldDoctor.fly_shuttle(Lagos));
-    all_get_to(BuenosAires);
+    all_get_to(Beijing, BuenosAires);
     //unable to fly shuttle to Moscow (a city with research station- but you're in BuenosAires that has no research station)
             CHECK_THROWS(operationsExpert.fly_shuttle(Moscow));
             CHECK_THROWS(dispatcher.fly_shuttle(Moscow));
@@ -292,8 +322,32 @@ TEST_CASE ("fly_shuttle") {
 
 TEST_CASE ("build") {
     //all now in BuenosAires
-    all_take_card(BuenosAires);
-    //able to build in BuenosAires and operationsExpert didnt waste his card
+    spread(BuenosAires);
+    take_different_cards();
+    /*operations expert in BuenosAires
+    dispatcher in Istanbul
+    scientist in Paris
+    researcher in Mumbai
+    medic in Sydney
+    virologist in Essen
+    geneSplicer in SanFrancisco
+    fieldDoctor in Santiago*/
+
+    //able to build all over and operationsExpert didnt waste his card
+            CHECK_NOTHROW(operationsExpert.build());
+            CHECK_NOTHROW(operationsExpert.fly_charter(MexicoCity)); //just now throwing the BuenosAires card!
+            CHECK_NOTHROW(dispatcher.build());
+            CHECK_NOTHROW(scientist.build());
+            CHECK_NOTHROW(researcher.build());
+            CHECK_NOTHROW(medic.build());
+            CHECK_NOTHROW(virologist.build());
+            CHECK_NOTHROW(geneSplicer.build());
+            CHECK_NOTHROW(fieldDoctor.build());
+    //bringing operations expert back to BuenosAires
+    operationsExpert.take_card(BuenosAires);
+    operationsExpert.fly_direct(BuenosAires);
+    take_different_cards();
+    //unable to build all over again but doesn't throw exception
             CHECK_NOTHROW(operationsExpert.build());
             CHECK_NOTHROW(operationsExpert.fly_charter(MexicoCity)); //just now throwing the Madrid card!
             CHECK_NOTHROW(dispatcher.build());
@@ -306,21 +360,7 @@ TEST_CASE ("build") {
     //bringing operations expert back to BuenosAires
     operationsExpert.take_card(BuenosAires);
     operationsExpert.fly_direct(BuenosAires);
-    all_take_card(BuenosAires);
-    //unable to build in BuenosAires again but doesn't throw exception
-            CHECK_NOTHROW(operationsExpert.build());
-            CHECK_NOTHROW(operationsExpert.fly_charter(MexicoCity)); //just now throwing the Madrid card!
-            CHECK_NOTHROW(dispatcher.build());
-            CHECK_NOTHROW(scientist.build());
-            CHECK_NOTHROW(researcher.build());
-            CHECK_NOTHROW(medic.build());
-            CHECK_NOTHROW(virologist.build());
-            CHECK_NOTHROW(geneSplicer.build());
-            CHECK_NOTHROW(fieldDoctor.build());
-    //bringing operations expert back to BuenosAires
-    operationsExpert.take_card(BuenosAires);
-    operationsExpert.fly_direct(BuenosAires);
-    all_get_to(Algiers);
+    all_get_to(BuenosAires, Algiers);
     //unable to build in Algiers except for operations expert
             CHECK_NOTHROW(operationsExpert.build());
             CHECK_THROWS(dispatcher.build());
@@ -330,4 +370,8 @@ TEST_CASE ("build") {
             CHECK_THROWS(virologist.build());
             CHECK_THROWS(geneSplicer.build());
             CHECK_THROWS(fieldDoctor.build());
+}
+
+TEST_CASE ("discover cure") {
+
 }

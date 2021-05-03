@@ -18,6 +18,7 @@ namespace pandemic {
             for (int i=0; i < 49 ; i++) cards[i]= false;
             curr_city=curr;
         }
+        std::string get_location(){return board.get_city_name(curr_city);} //TODO:remove it later
 
         virtual Player &take_card(City city);
 

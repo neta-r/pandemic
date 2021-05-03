@@ -13,20 +13,25 @@ namespace pandemic {
     }
 
     void Medic::discover_cure(Color color) {
-        Player::discover_cure(color);
-        switch (color) {
-            case Blue:
-                remove_all_diseases(0, 12);
-                break;
-            case Yellow:
-                remove_all_diseases(12, 24);
-                break;
-            case Black:
-                remove_all_diseases(24, 36);
-                break;
-            case Red:
-                remove_all_diseases(36, 48);
-                break;
+        try {
+            Player::discover_cure(color);
+            switch (color) {
+                case Blue:
+                    remove_all_diseases(0, 12);
+                    break;
+                case Yellow:
+                    remove_all_diseases(12, 24);
+                    break;
+                case Black:
+                    remove_all_diseases(24, 36);
+                    break;
+                case Red:
+                    remove_all_diseases(36, 48);
+                    break;
+            }
+        }
+        catch (const exception& ex) {
+            throw ex.what();
         }
     }
 

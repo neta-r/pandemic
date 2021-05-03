@@ -9,7 +9,7 @@ namespace pandemic {
         int counter = 0;
         for (int i = indexStart; i < indexEnd; i++) {
             if (cards[i]) counter++;
-            if (counter==n) break;
+            if (counter == n) break;
         }
         if (counter < n) return false;
         for (int i = indexStart; i < indexEnd; i++) {
@@ -17,7 +17,7 @@ namespace pandemic {
                 cards[i] = false;
                 counter--;
             }
-            if (counter==0) break;
+            if (counter == 0) break;
         }
         return true;
     }
@@ -68,9 +68,11 @@ namespace pandemic {
     }
 
     void Player::build() {
-        if (cards[int(curr_city)] && (!board.is_there_research_station(curr_city))) {
-            board.build(curr_city);
-            cards[int(curr_city)] = false;
+        if (cards[int(curr_city)]) {
+            if (!board.is_there_research_station(curr_city)) {
+                board.build(curr_city);
+                cards[int(curr_city)] = false;
+            }
         } else {
             string message = "You don't have a  " + board.get_city_name(curr_city) + " card!";
             throw std::invalid_argument(message);
@@ -159,6 +161,7 @@ namespace pandemic {
         }
         return *this;
     }
+
     string Player::role() {
         return "Player";
     }

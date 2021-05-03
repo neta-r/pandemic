@@ -62,6 +62,7 @@ TEST_CASE ("test board") {
             CHECK(board[Beijing] == 2);
             CHECK(board.is_clean() == false);
 }
+
 OperationsExpert builder{board, Beijing};
 OperationsExpert operationsExpert{board, Atlanta};
 Dispatcher dispatcher{board, Atlanta};
@@ -72,7 +73,14 @@ Virologist virologist{board, Atlanta};
 GeneSplicer geneSplicer{board, Atlanta};
 FieldDoctor fieldDoctor{board, Atlanta};
 
-void all_take_card(City city){
+void build_in(City city) {
+    builder.take_card(city);
+    builder.fly_direct(city);
+    builder.build();
+}
+
+
+void all_take_card(City city) {
     operationsExpert.take_card(city);
     dispatcher.take_card(city);
     scientist.take_card(city);
@@ -83,7 +91,19 @@ void all_take_card(City city){
     fieldDoctor.take_card(city);
 }
 
-void all_print_location(){ //TODO:remove it later
+void all_get_to(City city) {
+    all_take_card(city);
+    operationsExpert.fly_direct(city);
+    dispatcher.fly_direct(city);
+    scientist.fly_direct(city);
+    researcher.fly_direct(city);
+    medic.fly_direct(city);
+    virologist.fly_direct(city);
+    geneSplicer.fly_direct(city);
+    fieldDoctor.fly_direct(city);
+}
+
+void all_print_location() { //TODO:remove it later
     cout << operationsExpert.role() << "is in " << operationsExpert.get_location() << endl;
     cout << dispatcher.role() << "is in " << dispatcher.get_location() << endl;
     cout << scientist.role() << "is in " << scientist.get_location() << endl;
@@ -92,9 +112,19 @@ void all_print_location(){ //TODO:remove it later
     cout << virologist.role() << "is in " << virologist.get_location() << endl;
     cout << geneSplicer.role() << "is in " << geneSplicer.get_location() << endl;
     cout << fieldDoctor.role() << "is in " << fieldDoctor.get_location() << endl;
+    cout << "builder is in " << builder.get_location() << endl;
+}
 
-
-
+void all_print_cards() { //TODO:remove it later
+    cout << operationsExpert.role() << "has " << operationsExpert.get_cards() << endl;
+    cout << dispatcher.role() << "has " << dispatcher.get_cards() << endl;
+    cout << scientist.role() << "has " << scientist.get_cards() << endl;
+    cout << researcher.role() << "has " << researcher.get_cards() << endl;
+    cout << medic.role() << "has " << medic.get_cards() << endl;
+    cout << virologist.role() << "has " << virologist.get_cards() << endl;
+    cout << geneSplicer.role() << "has " << geneSplicer.get_cards() << endl;
+    cout << fieldDoctor.role() << "has " << fieldDoctor.get_cards() << endl;
+    cout << "builder has " << builder.get_cards() << endl;
 }
 
 TEST_CASE ("drive") {
@@ -167,7 +197,137 @@ TEST_CASE ("fly_direct") {
             CHECK_THROWS(virologist.fly_direct(Madrid));
             CHECK_THROWS(geneSplicer.fly_direct(Madrid));
             CHECK_THROWS(fieldDoctor.fly_direct(Madrid));
-    //let's bring dispatcher back to London
-    dispatcher.take_card(London);
-    dispatcher.fly_direct(London);
+    //let's bring dispatcher back to Beijing
+    dispatcher.take_card(Beijing);
+    dispatcher.fly_direct(Beijing);
+    all_take_card(Madrid);
+    //all able fly direct to Madrid and dispatcher didn't waste his card (Beijing has a research station)
+            CHECK_NOTHROW(operationsExpert.fly_direct(Madrid));
+            CHECK_NOTHROW(dispatcher.fly_direct(Madrid));
+            CHECK_NOTHROW(dispatcher.fly_charter(MexicoCity)); //just now throwing the Madrid card!
+            CHECK_NOTHROW(scientist.fly_direct(Madrid));
+            CHECK_NOTHROW(researcher.fly_direct(Madrid));
+            CHECK_NOTHROW(medic.fly_direct(Madrid));
+            CHECK_NOTHROW(virologist.fly_direct(Madrid));
+            CHECK_NOTHROW(geneSplicer.fly_direct(Madrid));
+            CHECK_NOTHROW(fieldDoctor.fly_direct(Madrid));
+}
+
+TEST_CASE ("fly_charter") {
+    all_get_to(Beijing);
+    //all now in Beijing
+    all_take_card(Beijing);
+    //able to fly charter to Beijing
+            CHECK_NOTHROW(operationsExpert.fly_charter(Manila));
+            CHECK_NOTHROW(dispatcher.fly_charter(Manila));
+            CHECK_NOTHROW(scientist.fly_charter(Manila));
+            CHECK_NOTHROW(researcher.fly_charter(Manila));
+            CHECK_NOTHROW(medic.fly_charter(Manila));
+            CHECK_NOTHROW(virologist.fly_charter(Manila));
+            CHECK_NOTHROW(geneSplicer.fly_charter(Manila));
+            CHECK_NOTHROW(fieldDoctor.fly_charter(Manila));
+    all_take_card(Moscow);
+    //unable to fly direct to Moscow (they can fly direct)
+            CHECK_THROWS(operationsExpert.fly_charter(Moscow));
+            CHECK_THROWS(dispatcher.fly_charter(Moscow));
+            CHECK_THROWS(scientist.fly_charter(Moscow));
+            CHECK_THROWS(researcher.fly_charter(Moscow));
+            CHECK_THROWS(medic.fly_charter(Moscow));
+            CHECK_THROWS(virologist.fly_charter(Moscow));
+            CHECK_THROWS(geneSplicer.fly_charter(Moscow));
+            CHECK_THROWS(fieldDoctor.fly_charter(Moscow));
+    build_in(Moscow); //built a research station in Moscow
+    //all unable fly direct to Tokyo including dispatcher (even though Moscow has a research station)
+            CHECK_THROWS(operationsExpert.fly_charter(Tokyo));
+            CHECK_THROWS(dispatcher.fly_charter(Tokyo));
+            CHECK_THROWS(scientist.fly_charter(Tokyo));
+            CHECK_THROWS(researcher.fly_charter(Tokyo));
+            CHECK_THROWS(medic.fly_charter(Tokyo));
+            CHECK_THROWS(virologist.fly_charter(Tokyo));
+            CHECK_THROWS(geneSplicer.fly_charter(Tokyo));
+            CHECK_THROWS(fieldDoctor.fly_charter(Tokyo));
+}
+
+TEST_CASE ("fly_shuttle") {
+    //all now in Manila
+    build_in(Manila); //built a research station in Manila
+    //able to fly shuttle to Beijing (a city with research station)
+            CHECK_NOTHROW(operationsExpert.fly_shuttle(Beijing));
+            CHECK_NOTHROW(dispatcher.fly_shuttle(Beijing));
+            CHECK_NOTHROW(scientist.fly_shuttle(Beijing));
+            CHECK_NOTHROW(researcher.fly_shuttle(Beijing));
+            CHECK_NOTHROW(medic.fly_shuttle(Beijing));
+            CHECK_NOTHROW(virologist.fly_shuttle(Beijing));
+            CHECK_NOTHROW(geneSplicer.fly_shuttle(Beijing));
+            CHECK_NOTHROW(fieldDoctor.fly_shuttle(Beijing));
+    //unable to fly shuttle to Lagos (a city without research station)
+            CHECK_THROWS(operationsExpert.fly_shuttle(Lagos));
+            CHECK_THROWS(dispatcher.fly_shuttle(Lagos));
+            CHECK_THROWS(scientist.fly_shuttle(Lagos));
+            CHECK_THROWS(researcher.fly_shuttle(Lagos));
+            CHECK_THROWS(medic.fly_shuttle(Lagos));
+            CHECK_THROWS(virologist.fly_shuttle(Lagos));
+            CHECK_THROWS(geneSplicer.fly_shuttle(Lagos));
+            CHECK_THROWS(fieldDoctor.fly_shuttle(Lagos));
+    all_get_to(BuenosAires);
+    //unable to fly shuttle to Moscow (a city with research station- but you're in BuenosAires that has no research station)
+            CHECK_THROWS(operationsExpert.fly_shuttle(Moscow));
+            CHECK_THROWS(dispatcher.fly_shuttle(Moscow));
+            CHECK_THROWS(scientist.fly_shuttle(Moscow));
+            CHECK_THROWS(researcher.fly_shuttle(Moscow));
+            CHECK_THROWS(medic.fly_shuttle(Moscow));
+            CHECK_THROWS(virologist.fly_shuttle(Moscow));
+            CHECK_THROWS(geneSplicer.fly_shuttle(Moscow));
+            CHECK_THROWS(fieldDoctor.fly_shuttle(Moscow));
+    //unable to fly shuttle to Milan (a city without research station- and you're in BuenosAires that has no research station)
+            CHECK_THROWS(operationsExpert.fly_shuttle(Milan));
+            CHECK_THROWS(dispatcher.fly_shuttle(Milan));
+            CHECK_THROWS(scientist.fly_shuttle(Milan));
+            CHECK_THROWS(researcher.fly_shuttle(Milan));
+            CHECK_THROWS(medic.fly_shuttle(Milan));
+            CHECK_THROWS(virologist.fly_shuttle(Milan));
+            CHECK_THROWS(geneSplicer.fly_shuttle(Milan));
+            CHECK_THROWS(fieldDoctor.fly_shuttle(Milan));
+}
+
+TEST_CASE ("build") {
+    //all now in BuenosAires
+    all_take_card(BuenosAires);
+    //able to build in BuenosAires and operationsExpert didnt waste his card
+            CHECK_NOTHROW(operationsExpert.build());
+            CHECK_NOTHROW(operationsExpert.fly_charter(MexicoCity)); //just now throwing the Madrid card!
+            CHECK_NOTHROW(dispatcher.build());
+            CHECK_NOTHROW(scientist.build());
+            CHECK_NOTHROW(researcher.build());
+            CHECK_NOTHROW(medic.build());
+            CHECK_NOTHROW(virologist.build());
+            CHECK_NOTHROW(geneSplicer.build());
+            CHECK_NOTHROW(fieldDoctor.build());
+    //bringing operations expert back to BuenosAires
+    operationsExpert.take_card(BuenosAires);
+    operationsExpert.fly_direct(BuenosAires);
+    all_take_card(BuenosAires);
+    //unable to build in BuenosAires again but doesn't throw exception
+            CHECK_NOTHROW(operationsExpert.build());
+            CHECK_NOTHROW(operationsExpert.fly_charter(MexicoCity)); //just now throwing the Madrid card!
+            CHECK_NOTHROW(dispatcher.build());
+            CHECK_NOTHROW(scientist.build());
+            CHECK_NOTHROW(researcher.build());
+            CHECK_NOTHROW(medic.build());
+            CHECK_NOTHROW(virologist.build());
+            CHECK_NOTHROW(geneSplicer.build());
+            CHECK_NOTHROW(fieldDoctor.build());
+    //bringing operations expert back to BuenosAires
+    operationsExpert.take_card(BuenosAires);
+    operationsExpert.fly_direct(BuenosAires);
+    all_get_to(Algiers);
+    //unable to build in Algiers except for operations expert
+            CHECK_NOTHROW(operationsExpert.build());
+            CHECK_THROWS(dispatcher.build());
+            CHECK_THROWS(scientist.build());
+            CHECK_THROWS(researcher.build());
+            CHECK_THROWS(medic.build());
+            CHECK_THROWS(virologist.build());
+            CHECK_THROWS(geneSplicer.build());
+            CHECK_THROWS(fieldDoctor.build());
 }

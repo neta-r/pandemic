@@ -140,4 +140,8 @@ namespace pandemic{
         }
         return false;
     }
+
+    void Board::remove_cures(){
+        blue_cure=yellow_cure=black_cure=red_cure= false;
+    }
 }

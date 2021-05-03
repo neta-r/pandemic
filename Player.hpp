@@ -19,23 +19,23 @@ namespace pandemic {
             curr_city=curr;
         }
 
-        Player &take_card(City city);
+        virtual Player &take_card(City city);
 
-        Player &drive(City other);
+        virtual Player &drive(City other);
 
-        Player &fly_direct(City dest_city);
+        virtual Player &fly_direct(City dest_city);
 
-        Player &fly_charter(City dest_city);
+        virtual Player &fly_charter(City dest_city);
 
-        Player &fly_shuttle(City dest_city);
+        virtual Player &fly_shuttle(City dest_city);
 
-        void build();
+        virtual void build();
 
-        void discover_cure(Color color);
+        virtual void discover_cure(Color color);
 
-        Player & treat(City city);
+        virtual Player & treat(City city);
 
-        std::string role();
+        virtual std::string role();
     };
 }
 

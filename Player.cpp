@@ -1,20 +1,23 @@
 
 #include "Player.hpp"
+#include <iostream>
 
 using namespace std;
 namespace pandemic {
 
     bool Player::removeCards(int indexStart, int indexEnd, int n) {
         int counter = 0;
-        for (int i = indexStart; i < indexEnd && counter != n; i++) {
+        for (int i = indexStart; i < indexEnd; i++) {
             if (cards[i]) counter++;
+            if (counter==n) break;
         }
         if (counter < n) return false;
-        for (int i = indexStart; i < indexEnd && counter > 0; i++) {
+        for (int i = indexStart; i < indexEnd; i++) {
             if (cards[i]) {
                 cards[i] = false;
                 counter--;
             }
+            if (counter==0) break;
         }
         return true;
     }
@@ -155,5 +158,8 @@ namespace pandemic {
                 break;
         }
         return *this;
+    }
+    string Player::role() {
+        return "Player";
     }
 }

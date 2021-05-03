@@ -5,7 +5,6 @@
 #ifndef UNTITLED_VIROLOGIST_H
 #define UNTITLED_VIROLOGIST_H
 #include "Player.hpp"
-
 namespace pandemic {
     class Virologist : public Player {
     public:

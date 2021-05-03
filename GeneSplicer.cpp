@@ -6,6 +6,11 @@
 using namespace std;
 namespace pandemic {
     void GeneSplicer::discover_cure(Color color) {
+        if (!board.is_there_research_station(curr_city)){
+            string message =
+                    "You're current city " + board.get_city_name(curr_city) + " doesn't have a research station!";
+            throw std::invalid_argument(message);
+        }
         int counter=0;
         for (int i=0; i<49&&counter!=5; i++){
             if (cards[i]) {

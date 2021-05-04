@@ -130,14 +130,14 @@ void take_different_cards() {
 }
 
 void clear_all() {
-    operationsExpert.clear_all();
-    dispatcher.clear_all();
-    scientist.clear_all();
-    researcher.clear_all();
-    medic.clear_all();
-    virologist.clear_all();
-    geneSplicer.clear_all();
-    fieldDoctor.clear_all();
+    operationsExpert.remove_cards();
+    dispatcher.remove_cards();
+    scientist.remove_cards();
+    researcher.remove_cards();
+    medic.remove_cards();
+    virologist.remove_cards();
+    geneSplicer.remove_cards();
+    fieldDoctor.remove_cards();
 }
 
 void all_print_location() { //TODO:remove it later
@@ -382,26 +382,45 @@ TEST_CASE ("build") {
             CHECK_THROWS(fieldDoctor.build());
 }
 
-void able_to_discover_regular(City one, City two, City three, City four, City five, Color color) {
-    all_take_card(one);
-    all_take_card(two);
-    all_take_card(three);
-    all_take_card(four);
-    all_take_card(five);
-            CHECK_NOTHROW(operationsExpert.discover_cure(color));
+
+
+void discover_twice(Player& p, City research, City one, City two, City three, City four, City five, Color color){
+    p.take_card(one).take_card(two).take_card(three).take_card(four).take_card(five);
+            CHECK_NOTHROW(p.discover_cure(color));
+    p.take_card(one).take_card(two).take_card(three).take_card(four).take_card(five);
+            CHECK_NOTHROW(p.discover_cure(color));
+            CHECK_NOTHROW(p.fly_direct(one));
+            CHECK_NOTHROW(p.fly_direct(two));
+            CHECK_NOTHROW(p.fly_direct(three));
+            CHECK_NOTHROW(p.fly_direct(four));
+            CHECK_NOTHROW(p.fly_direct(five));
+            get_to(p,five, research);
     board.remove_cures();
-            CHECK_NOTHROW(dispatcher.discover_cure(color));
-    board.remove_cures();
-            CHECK_NOTHROW(scientist.discover_cure(color));
-    board.remove_cures();
-            CHECK_NOTHROW(medic.discover_cure(color));
-    board.remove_cures();
-            CHECK_NOTHROW(virologist.discover_cure(color));
-    board.remove_cures();
-            CHECK_NOTHROW(geneSplicer.discover_cure(color));
-    board.remove_cures();
-            CHECK_NOTHROW(fieldDoctor.discover_cure(color));
-    board.remove_cures();
+}
+
+void all_discover_twice(City research, City one, City two, City three, City four, City five, Color color){
+    discover_twice(operationsExpert,research,one, two, three, four, five, color);
+    discover_twice(dispatcher,research, one, two, three, four, five, color);
+    discover_twice(scientist,research, one, two, three, four, five, color);
+    discover_twice(researcher, research, one, two, three, four, five, color);
+    discover_twice(medic,research,one, two, three, four, five, color);
+    discover_twice(virologist,research,one, two, three, four, five, color);
+    discover_twice(geneSplicer,research,one, two, three, four, five, color);
+    discover_twice(fieldDoctor,research,one, two, three, four, five, color);
+}
+
+TEST_CASE ("discover cure") {
+    clear_all();
+    //all in Algiers a city with a research station
+    //able to discover blue cure and unble to discovre it twice
+    all_discover_twice(Algiers,SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
+    //able to discover yellow cure and unble to discovre it twice
+    all_discover_twice(Algiers,SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
+    //able to discover black cure and unble to discovre it twice
+    all_discover_twice(Algiers,Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
+    //able to discover red cure and unble to discovre it twice
+    all_discover_twice(Algiers,Sydney, Manila, Osaka, Taipei, Bangkok, Red);
+    //check medic special
 }
 
 void able_to_discover_mixed_color(City one, City two, City three, City four, City five, Color color) {
@@ -421,6 +440,14 @@ void able_to_discover_mixed_color(City one, City two, City three, City four, Cit
             CHECK_THROWS(fieldDoctor.discover_cure(color));
 }
 
+//TEST_CASE ("discover cure - mixed colors") {
+//    clear_all();
+//    able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Blue);
+//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Yellow);
+//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Black);
+//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Red);
+//}
+
 void able_to_discover_with_three_cards(City one, City two, City three, Color color) {
     all_take_card(one);
     all_take_card(two);
@@ -436,31 +463,38 @@ void able_to_discover_with_three_cards(City one, City two, City three, Color col
             CHECK_THROWS(fieldDoctor.discover_cure(color));
 }
 
-TEST_CASE ("discover cure") {
-    clear_all();
-    //all in Algiers a city with a research station
-    //able to discover blue cure
-    able_to_discover_regular(SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
-    //able to discover yellow cure
-    able_to_discover_regular(SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
-    //able to discover black cure
-    able_to_discover_regular(Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
-    //able to discover red cure
-    able_to_discover_regular(Sydney, Manila, Osaka, Taipei, Bangkok, Red);
-    clear_all();
-//    able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Blue);
-//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Yellow);
-//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Black);
-//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Red);
-    clear_all();
-    able_to_discover_with_three_cards(SanFrancisco, Chicago, Montreal, Blue);
-    clear_all();
-    able_to_discover_with_three_cards(SaoPaulo, Bogota, Miami, Yellow);
-    clear_all();
-    able_to_discover_with_three_cards(Moscow, Baghdad, Tehran, Black);
-    clear_all();
-    able_to_discover_with_three_cards(Sydney, Manila, Osaka, Red);
-    //check medic special , that it doesn't throws after already discovering a cure and keeps the cards,
-    //trying to discover in a city that had no research station in it
+//TEST_CASE ("discover cure - less then 5 cards") {
+//    clear_all();
+//    able_to_discover_with_three_cards(SanFrancisco, Chicago, Montreal, Blue);
+//    clear_all();
+//    able_to_discover_with_three_cards(SaoPaulo, Bogota, Miami, Yellow);
+//    clear_all();
+//    able_to_discover_with_three_cards(Moscow, Baghdad, Tehran, Black);
+//    clear_all();
+//    able_to_discover_with_three_cards(Sydney, Manila, Osaka, Red);
+//}
+
+
+void unable_to_discover_not_in_a_research_station(City one, City two, City three, City four, City five, Color color) {
+    all_take_card(one);
+    all_take_card(two);
+    all_take_card(three);
+    all_take_card(four);
+    all_take_card(five);
+            CHECK_THROWS(operationsExpert.discover_cure(color));
+            CHECK_THROWS(dispatcher.discover_cure(color));
+            CHECK_THROWS(scientist.discover_cure(color));
+            CHECK_THROWS(medic.discover_cure(color));
+            CHECK_THROWS(operationsExpert.discover_cure(color));
+            CHECK_THROWS(virologist.discover_cure(color));
+            CHECK_THROWS(geneSplicer.discover_cure(color));
+            CHECK_THROWS(fieldDoctor.discover_cure(color));
 }
 
+//TEST_CASE("discover cure - not in a research station"){
+//    all_get_to(Algiers, NewYork); //NewYork has no research station
+//    unable_to_discover_not_in_a_research_station(SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
+//    unable_to_discover_not_in_a_research_station(SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
+//    unable_to_discover_not_in_a_research_station(Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
+//    unable_to_discover_not_in_a_research_station(Sydney, Manila, Osaka, Taipei, Bangkok, Red);
+//}

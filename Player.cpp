@@ -39,7 +39,7 @@ namespace pandemic {
             cards[int(card)] = false;
             return;
         } else {
-            string message = "You don't have a " + board.get_city_name(card) + " card!";
+            string message = role()+" have a " + board.get_city_name(card) + " card!";
             throw std::invalid_argument(message);
         }
     }
@@ -166,7 +166,7 @@ namespace pandemic {
         return "Player";
     }
 
-    void Player::clear_all() {
+    void Player::remove_cards() {
         for (int i=0; i<49; i++){
             cards[i]= false;
         }

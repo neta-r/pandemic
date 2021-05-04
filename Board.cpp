@@ -111,16 +111,16 @@ namespace pandemic{
             ans+= "City:" + get.city_name+ ", Amount of diseases: " + to_string(get.level) + '\n';
         }
         if (board.blue_cure){
-            ans+="blue cure has been discovered!";
+            ans+="blue cure has been discovered!\n";
         }
         if (board.yellow_cure){
-            ans+="yellow cure has been discovered!";
+            ans+="yellow cure has been discovered!\n";
         }
         if (board.black_cure){
-            ans+="black cure has been discovered!";
+            ans+="black cure has been discovered!\n";
         }
         if (board.red_cure){
-            ans+="red cure has been discovered!";
+            ans+="red cure has been discovered!\n";
         }
         ans+= "Research station built: "+to_string(board.stations)+"\n";
 

@@ -30,7 +30,7 @@ namespace pandemic {
             return ans;
         }
 
-        void clear_all();
+        void remove_cards();
 
         virtual Player &take_card(City city);
 

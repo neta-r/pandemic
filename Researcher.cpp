@@ -19,7 +19,7 @@ namespace pandemic {
                 break;
             case Black:
                 if (board.black_cure) return; //If black cure exists we won't take the cards
-                board.blue_cure = res = removeCards(24, 36, 5);
+                board.black_cure = res = removeCards(24, 36, 5);
                 break;
             case Red:
                 if (board.red_cure) return; //If red cure exists we won't take the cards

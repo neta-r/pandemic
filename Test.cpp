@@ -467,16 +467,16 @@ void able_to_discover_with_three_cards(City one, City two, City three, Color col
             CHECK_THROWS(fieldDoctor.discover_cure(color));
 }
 
-//TEST_CASE ("discover cure - less then 5 cards") {
-//    clear_all();
-//    able_to_discover_with_three_cards(SanFrancisco, Chicago, Montreal, Blue);
-//    clear_all();
-//    able_to_discover_with_three_cards(SaoPaulo, Bogota, Miami, Yellow);
-//    clear_all();
-//    able_to_discover_with_three_cards(Moscow, Baghdad, Tehran, Black);
-//    clear_all();
-//    able_to_discover_with_three_cards(Sydney, Manila, Osaka, Red);
-//}
+TEST_CASE ("discover cure - less then 5 cards") {
+    clear_all();
+    able_to_discover_with_three_cards(SanFrancisco, Chicago, Montreal, Blue);
+    clear_all();
+    able_to_discover_with_three_cards(SaoPaulo, Bogota, Miami, Yellow);
+    clear_all();
+    able_to_discover_with_three_cards(Moscow, Baghdad, Tehran, Black);
+    clear_all();
+    able_to_discover_with_three_cards(Sydney, Manila, Osaka, Red);
+}
 
 
 void unable_to_discover_not_in_a_research_station(City one, City two, City three, City four, City five, Color color) {
@@ -495,10 +495,10 @@ void unable_to_discover_not_in_a_research_station(City one, City two, City three
             CHECK_THROWS(fieldDoctor.discover_cure(color));
 }
 
-//TEST_CASE("discover cure - not in a research station"){
-//    all_get_to(Algiers, NewYork); //NewYork has no research station
-//    unable_to_discover_not_in_a_research_station(SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
-//    unable_to_discover_not_in_a_research_station(SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
-//    unable_to_discover_not_in_a_research_station(Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
-//    unable_to_discover_not_in_a_research_station(Sydney, Manila, Osaka, Taipei, Bangkok, Red);
-//}
+TEST_CASE("discover cure - not in a research station"){
+    all_get_to(Algiers, NewYork); //NewYork has no research station
+    unable_to_discover_not_in_a_research_station(SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
+    unable_to_discover_not_in_a_research_station(SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
+    unable_to_discover_not_in_a_research_station(Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
+    unable_to_discover_not_in_a_research_station(Sydney, Manila, Osaka, Taipei, Bangkok, Red);
+}

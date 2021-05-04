@@ -414,12 +414,16 @@ TEST_CASE ("discover cure") {
     //all in Algiers a city with a research station
     //able to discover blue cure and unble to discovre it twice
     all_discover_twice(Algiers,SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
+    clear_all();
     //able to discover yellow cure and unble to discovre it twice
     all_discover_twice(Algiers,SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
+    clear_all();
     //able to discover black cure and unble to discovre it twice
     all_discover_twice(Algiers,Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
+    clear_all();
     //able to discover red cure and unble to discovre it twice
     all_discover_twice(Algiers,Sydney, Manila, Osaka, Taipei, Bangkok, Red);
+    clear_all();
     //check medic special
 }
 

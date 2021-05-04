@@ -31,6 +31,20 @@ namespace pandemic {
                 counter--;
             }
         }
+        if (color==Blue) {
+            board.blue_cure= true;
+            return;
+        }
+        if (color==Yellow) {
+            board.yellow_cure= true;
+            return;
+        }if (color==Black) {
+            board.black_cure= true;
+            return;
+        }if (color==Red) {
+            board.red_cure= true;
+            return;
+        }
     }
     string GeneSplicer::role() {
         return "Gene Splicer";

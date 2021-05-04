@@ -11,6 +11,9 @@ namespace pandemic {
             if (cards[i]) counter++;
             if (counter == n) break;
         }
+//        if (role()=="Scientist"){ //TODO: REMOVE LATER
+//            cout << "n is: "  << to_string(n) << " and counter is: " << to_string(counter) << endl;
+//        }
         if (counter < n) return false;
         for (int i = indexStart; i < indexEnd; i++) {
             if (cards[i]) {

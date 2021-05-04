@@ -36,6 +36,11 @@ namespace pandemic {
     }
 
     Player &Medic::treat(City city) {
+        if (city != curr_city) {
+            string message =
+                    "You have to be in the city in order to treat it!";
+            throw std::invalid_argument(message);
+        }
         if (board.get_city_level(city) == 0) {
             string message =
                     "Current city's level of disease is 0!";

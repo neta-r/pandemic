@@ -383,8 +383,7 @@ TEST_CASE ("build") {
 }
 
 
-
-void discover_twice(Player& p, City research, City one, City two, City three, City four, City five, Color color){
+void discover_twice(Player &p, City research, City one, City two, City three, City four, City five, Color color) {
     p.take_card(one).take_card(two).take_card(three).take_card(four).take_card(five);
             CHECK_NOTHROW(p.discover_cure(color));
     p.take_card(one).take_card(two).take_card(three).take_card(four).take_card(five);
@@ -394,37 +393,36 @@ void discover_twice(Player& p, City research, City one, City two, City three, Ci
             CHECK_NOTHROW(p.fly_direct(three));
             CHECK_NOTHROW(p.fly_direct(four));
             CHECK_NOTHROW(p.fly_direct(five));
-            get_to(p,five, research);
+    get_to(p, five, research);
     board.remove_cures();
 }
 
-void all_discover_twice(City research, City one, City two, City three, City four, City five, Color color){
-    discover_twice(operationsExpert,research,one, two, three, four, five, color);
-    discover_twice(dispatcher,research, one, two, three, four, five, color);
-    discover_twice(scientist,research, one, two, three, four, five, color);
+void all_discover_twice(City research, City one, City two, City three, City four, City five, Color color) {
+    discover_twice(operationsExpert, research, one, two, three, four, five, color);
+    discover_twice(dispatcher, research, one, two, three, four, five, color);
+    discover_twice(scientist, research, one, two, three, four, five, color);
     discover_twice(researcher, research, one, two, three, four, five, color);
-    discover_twice(medic,research,one, two, three, four, five, color);
-    discover_twice(virologist,research,one, two, three, four, five, color);
-    discover_twice(geneSplicer,research,one, two, three, four, five, color);
-    discover_twice(fieldDoctor,research,one, two, three, four, five, color);
+    discover_twice(medic, research, one, two, three, four, five, color);
+    discover_twice(virologist, research, one, two, three, four, five, color);
+    discover_twice(geneSplicer, research, one, two, three, four, five, color);
+    discover_twice(fieldDoctor, research, one, two, three, four, five, color);
 }
 
-TEST_CASE ("discover cure") {
+TEST_CASE ("discover cure - regular actions") {
     clear_all();
     //all in Algiers a city with a research station
     //able to discover blue cure and unble to discovre it twice
-    all_discover_twice(Algiers,SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
+    all_discover_twice(Algiers, SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
     clear_all();
     //able to discover yellow cure and unble to discovre it twice
-    all_discover_twice(Algiers,SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
+    all_discover_twice(Algiers, SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
     clear_all();
     //able to discover black cure and unble to discovre it twice
-    all_discover_twice(Algiers,Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
+    all_discover_twice(Algiers, Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
     clear_all();
     //able to discover red cure and unble to discovre it twice
-    all_discover_twice(Algiers,Sydney, Manila, Osaka, Taipei, Bangkok, Red);
+    all_discover_twice(Algiers, Sydney, Manila, Osaka, Taipei, Bangkok, Red);
     clear_all();
-    //check medic special
 }
 
 void able_to_discover_mixed_color(City one, City two, City three, City four, City five, Color color) {
@@ -436,7 +434,10 @@ void able_to_discover_mixed_color(City one, City two, City three, City four, Cit
     //Only **GeneSplicer** able to
             CHECK_THROWS(operationsExpert.discover_cure(color));
             CHECK_THROWS(dispatcher.discover_cure(color));
-            CHECK_THROWS(scientist.discover_cure(color));
+//    scientist.discover_cure(color);
+//    cout << board << endl;
+    // CHECK_THROWS(scientist.discover_cure(color));
+            CHECK_THROWS(researcher.discover_cure(color));
             CHECK_THROWS(medic.discover_cure(color));
             CHECK_THROWS(virologist.discover_cure(color));
             CHECK_NOTHROW(geneSplicer.discover_cure(color));
@@ -444,13 +445,13 @@ void able_to_discover_mixed_color(City one, City two, City three, City four, Cit
             CHECK_THROWS(fieldDoctor.discover_cure(color));
 }
 
-//TEST_CASE ("discover cure - mixed colors") {
-//    clear_all();
-//    able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Blue);
-//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Yellow);
-//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Black);
-//    able_to_discover_mixed_color(SanFrancisco,Bogota,Chennai,Sydney,Miami,Red);
-//}
+TEST_CASE ("discover cure - mixed colors") {
+    clear_all();
+    able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Blue);
+    able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Yellow);
+    able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Black);
+    able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Red);
+}
 
 void able_to_discover_with_three_cards(City one, City two, City three, Color color) {
     all_take_card(one);
@@ -461,6 +462,7 @@ void able_to_discover_with_three_cards(City one, City two, City three, Color col
             CHECK_THROWS(dispatcher.discover_cure(color));
             CHECK_NOTHROW(scientist.discover_cure(color));
     board.remove_cures();
+            CHECK_THROWS(researcher.discover_cure(color));
             CHECK_THROWS(medic.discover_cure(color));
             CHECK_THROWS(virologist.discover_cure(color));
             CHECK_THROWS(geneSplicer.discover_cure(color));
@@ -485,20 +487,110 @@ void unable_to_discover_not_in_a_research_station(City one, City two, City three
     all_take_card(three);
     all_take_card(four);
     all_take_card(five);
+    //Only **researcher** able to
             CHECK_THROWS(operationsExpert.discover_cure(color));
             CHECK_THROWS(dispatcher.discover_cure(color));
             CHECK_THROWS(scientist.discover_cure(color));
             CHECK_THROWS(medic.discover_cure(color));
-            CHECK_THROWS(operationsExpert.discover_cure(color));
+            CHECK_NOTHROW(researcher.discover_cure(color));
+    board.remove_cures();
             CHECK_THROWS(virologist.discover_cure(color));
             CHECK_THROWS(geneSplicer.discover_cure(color));
             CHECK_THROWS(fieldDoctor.discover_cure(color));
 }
 
-TEST_CASE("discover cure - not in a research station"){
+TEST_CASE ("discover cure - not in a research station") {
     all_get_to(Algiers, NewYork); //NewYork has no research station
     unable_to_discover_not_in_a_research_station(SanFrancisco, Chicago, Montreal, NewYork, Washington, Blue);
     unable_to_discover_not_in_a_research_station(SaoPaulo, Bogota, Miami, MexicoCity, Santiago, Yellow);
     unable_to_discover_not_in_a_research_station(Moscow, Baghdad, Tehran, Chennai, Mumbai, Black);
     unable_to_discover_not_in_a_research_station(Sydney, Manila, Osaka, Taipei, Bangkok, Red);
+}
+
+void able_to_treat_no_cure() {
+    //Only **medic** reduce disease level to 0 !!
+    board[NewYork] = 8;
+            CHECK_NOTHROW(operationsExpert.treat(NewYork));
+            CHECK(board[NewYork] == 7);
+            CHECK_NOTHROW(dispatcher.treat(NewYork));
+            CHECK(board[NewYork] == 6);
+            CHECK_NOTHROW(scientist.treat(NewYork));
+            CHECK(board[NewYork] == 5);
+            CHECK_NOTHROW(researcher.treat(NewYork));
+            CHECK(board[NewYork] == 4);
+            CHECK_NOTHROW(medic.treat(NewYork));
+            CHECK(board[NewYork] == 0);
+    board[NewYork] = 3;
+            CHECK_NOTHROW(virologist.treat(NewYork));
+            CHECK(board[NewYork] == 2);
+            CHECK_NOTHROW(geneSplicer.treat(NewYork));
+            CHECK(board[NewYork] == 1);
+            CHECK_NOTHROW(fieldDoctor.treat(NewYork));
+            CHECK(board[NewYork] == 0);
+}
+
+void able_to_treat_with_cure(Player &p) {
+    board[NewYork] = 8;
+    builder.take_card(London).take_card(Paris).take_card(Washington).take_card(Essen).take_card(Milan);
+    builder.discover_cure(Blue);
+            CHECK_NOTHROW(operationsExpert.treat(NewYork));
+            CHECK(board[NewYork] == 0);
+    board.remove_cures();
+}
+
+void all_able_to_treat_with_cure() {
+    able_to_treat_with_cure(operationsExpert);
+    able_to_treat_with_cure(dispatcher);
+    able_to_treat_with_cure(scientist);
+    able_to_treat_with_cure(researcher);
+    able_to_treat_with_cure(medic);
+    able_to_treat_with_cure(virologist);
+    able_to_treat_with_cure(geneSplicer);
+    able_to_treat_with_cure(fieldDoctor);
+}
+
+void all_throw() {
+            CHECK_THROWS(operationsExpert.treat(NewYork));
+            CHECK_THROWS(dispatcher.treat(NewYork));
+            CHECK_THROWS(scientist.treat(NewYork));
+            CHECK_THROWS(researcher.treat(NewYork));
+            CHECK_THROWS(medic.treat(NewYork));
+            CHECK_THROWS(virologist.treat(NewYork));
+            CHECK_THROWS(geneSplicer.treat(NewYork));
+            CHECK_THROWS(fieldDoctor.treat(NewYork));
+}
+void able_to_treat_not_in_the_same_city() {
+    //Only **virologist** able to
+    board[Manila] = 8;
+            CHECK_THROWS(operationsExpert.treat(Manila));
+            CHECK_THROWS(dispatcher.treat(Manila));
+            CHECK_THROWS(scientist.treat(Manila));
+            CHECK_THROWS(researcher.treat(Manila));
+            CHECK_THROWS(medic.treat(Manila));
+            CHECK_NOTHROW(virologist.treat(Manila));
+            CHECK_THROWS(geneSplicer.treat(Manila));
+            CHECK_THROWS(fieldDoctor.treat(Manila));
+}
+
+void able_to_treat_not_in_a_nearby_city() {
+    //Only **fieldDoctor** able to (and virologist- can everywhere)
+    board[Washington] = 8;
+            CHECK_THROWS(operationsExpert.treat(Washington));
+            CHECK_THROWS(dispatcher.treat(Washington));
+            CHECK_THROWS(scientist.treat(Washington));
+            CHECK_THROWS(researcher.treat(Washington));
+            CHECK_THROWS(medic.treat(Washington));
+            CHECK_NOTHROW(virologist.treat(Washington));
+            CHECK_THROWS(geneSplicer.treat(Washington));
+            CHECK_NOTHROW(fieldDoctor.treat(Washington));
+}
+
+TEST_CASE ("treat - regular actions") {
+    //all in NewYork
+    board.remove_cures();
+    able_to_treat_no_cure();
+    all_able_to_treat_with_cure();
+    all_throw();
+    able_to_treat_not_in_the_same_city();
+    able_to_treat_not_in_a_nearby_city();
 }

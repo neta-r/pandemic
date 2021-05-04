@@ -13,19 +13,19 @@ namespace pandemic {
             switch (color) {
                 case Blue:
                     if (board.blue_cure) return; //If blue cure exists we won't take the cards
-                    board.blue_cure = res = removeCards(0, 12, number_of_cards);
+                    board.blue_cure = res = removeCards(0, 12, this->number_of_cards);
                     break;
                 case Yellow:
                     if (board.yellow_cure) return; //If yellow cure exists we won't take the cards
-                    board.yellow_cure = res = removeCards(12, 24, number_of_cards);
+                    board.yellow_cure = res = removeCards(12, 24, this->number_of_cards);
                     break;
                 case Black:
                     if (board.black_cure) return; //If black cure exists we won't take the cards
-                    board.blue_cure = res = removeCards(24, 36, number_of_cards);
+                    board.black_cure = res = removeCards(24, 36, this->number_of_cards);
                     break;
                 case Red:
                     if (board.red_cure) return; //If red cure exists we won't take the cards
-                    board.red_cure = res = removeCards(36, 48, number_of_cards);
+                    board.red_cure = res = removeCards(36, 48, this->number_of_cards);
                     break;
             }
             if (!res) {

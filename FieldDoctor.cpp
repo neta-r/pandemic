@@ -6,7 +6,7 @@
 using namespace std;
 namespace pandemic {
     Player &FieldDoctor::treat(City city) {
-        if (city != curr_city||board.are_neighbors(curr_city,city)) {
+        if (city != curr_city&&!board.are_neighbors(curr_city,city)) {
             string message =
                     "You have to be in the city in order to treat it or in a neighbor city!";
             throw std::invalid_argument(message);

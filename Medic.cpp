@@ -6,51 +6,66 @@
 
 using namespace std;
 namespace pandemic {
-    void Medic::remove_all_diseases(int indexStart, int indexEnd){
-        for (int i = indexStart; i < indexEnd; i++) {
-            board.reduce_city_level_by_all(static_cast<City>(i));
-        }
-    }
 
-    void Medic::discover_cure(Color color) {
+    Player &Medic::drive(City other) {
         try {
-            Player::discover_cure(color);
-            switch (color) {
-                case Blue:
-                    remove_all_diseases(0, 12);
-                    break;
-                case Yellow:
-                    remove_all_diseases(12, 24);
-                    break;
-                case Black:
-                    remove_all_diseases(24, 36);
-                    break;
-                case Red:
-                    remove_all_diseases(36, 48);
-                    break;
-            }
-        }
-        catch (const exception& ex) {
+            Player::drive(other);
+            board.reduce_city_level_by_all(static_cast<City>(other));
+        } catch (const exception &ex) {
             throw ex.what();
         }
-    }
-
-    Player &Medic::treat(City city) {
-        if (city != curr_city) {
-            string message =
-                    "You have to be in the city in order to treat it!";
-            throw std::invalid_argument(message);
-        }
-        if (board.get_city_level(city) == 0) {
-            string message =
-                    "Current city's level of disease is 0!";
-            throw std::invalid_argument(message);
-        }
-        board.reduce_city_level_by_all(city);
         return *this;
     }
 
-    string Medic::role() {
-        return "Medic";
+    Player &Medic::fly_direct(City other) {
+        try {
+            Player::fly_direct(other);
+            board.reduce_city_level_by_all(static_cast<City>(other));
+        }
+        catch (const exception &ex) {
+            throw ex.what();
+        }
+        return *this;
     }
+
+    Player &Medic::fly_charter(City other) {
+        try {
+            Player::fly_charter(other);
+            board.reduce_city_level_by_all(static_cast<City>(other));
+        }
+        catch (const exception &ex) {
+            throw ex.what();
+        }
+        return *this;
+    }
+
+    Player &Medic::fly_shuttle(City other) {
+        try {
+            Player::fly_shuttle(other);
+            board.reduce_city_level_by_all(static_cast<City>(other));
+    } catch (const exception &ex) {
+        throw ex.what();
+    }
+    return *this;
+}
+
+Player &Medic::treat(City city) {
+    if (city != curr_city) {
+        string message =
+                "You have to be in the city in order to treat it!";
+        throw std::invalid_argument(message);
+    }
+    if (board.get_city_level(city) == 0) {
+        string message =
+                "Current city's level of disease is 0!";
+        throw std::invalid_argument(message);
+    }
+    board.reduce_city_level_by_all(city);
+    return *this;
+}
+
+string Medic::role() {
+    return "Medic";
+}
+
 }

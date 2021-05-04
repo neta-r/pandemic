@@ -7,12 +7,18 @@
 #include "Player.hpp"
 namespace pandemic {
     class Medic : public Player {
-    private:
-        void remove_all_diseases(int indexStart, int indexEnd);
     public:
         Medic(Board& board, City city): Player(board, city){}
         Player & treat(City city);
-        void discover_cure(Color color);
+
+        Player &drive(City other);
+
+        Player &fly_direct(City dest_city);
+
+        Player &fly_charter(City dest_city);
+
+        Player &fly_shuttle(City dest_city);
+
         std::string role();
     };
 }

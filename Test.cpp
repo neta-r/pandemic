@@ -140,30 +140,6 @@ void clear_all() {
     fieldDoctor.remove_cards();
 }
 
-void all_print_location() { //TODO:remove it later
-    cout << operationsExpert.role() << "is in " << operationsExpert.get_location() << endl;
-    cout << dispatcher.role() << "is in " << dispatcher.get_location() << endl;
-    cout << scientist.role() << "is in " << scientist.get_location() << endl;
-    cout << researcher.role() << "is in " << researcher.get_location() << endl;
-    cout << medic.role() << "is in " << medic.get_location() << endl;
-    cout << virologist.role() << "is in " << virologist.get_location() << endl;
-    cout << geneSplicer.role() << "is in " << geneSplicer.get_location() << endl;
-    cout << fieldDoctor.role() << "is in " << fieldDoctor.get_location() << endl;
-    cout << "builder is in " << builder.get_location() << endl;
-}
-
-void all_print_cards() { //TODO:remove it later
-    cout << operationsExpert.role() << "has " << operationsExpert.get_cards() << endl;
-    cout << dispatcher.role() << "has " << dispatcher.get_cards() << endl;
-    cout << scientist.role() << "has " << scientist.get_cards() << endl;
-    cout << researcher.role() << "has " << researcher.get_cards() << endl;
-    cout << medic.role() << "has " << medic.get_cards() << endl;
-    cout << virologist.role() << "has " << virologist.get_cards() << endl;
-    cout << geneSplicer.role() << "has " << geneSplicer.get_cards() << endl;
-    cout << fieldDoctor.role() << "has " << fieldDoctor.get_cards() << endl;
-    cout << "builder has " << builder.get_cards() << endl;
-}
-
 TEST_CASE ("drive") {
     //able to drive to a nearby city in the same color
             CHECK_NOTHROW(operationsExpert.drive(Washington));
@@ -434,9 +410,7 @@ void able_to_discover_mixed_color(City one, City two, City three, City four, Cit
     //Only **GeneSplicer** able to
             CHECK_THROWS(operationsExpert.discover_cure(color));
             CHECK_THROWS(dispatcher.discover_cure(color));
-//    scientist.discover_cure(color);
-//    cout << board << endl;
-    // CHECK_THROWS(scientist.discover_cure(color));
+            CHECK_THROWS(scientist.discover_cure(color));
             CHECK_THROWS(researcher.discover_cure(color));
             CHECK_THROWS(medic.discover_cure(color));
             CHECK_THROWS(virologist.discover_cure(color));
@@ -559,6 +533,7 @@ void all_throw() {
             CHECK_THROWS(geneSplicer.treat(NewYork));
             CHECK_THROWS(fieldDoctor.treat(NewYork));
 }
+
 void able_to_treat_not_in_the_same_city() {
     //Only **virologist** able to
     board[Manila] = 8;
@@ -585,6 +560,93 @@ void able_to_treat_not_in_a_nearby_city() {
             CHECK_NOTHROW(fieldDoctor.treat(Washington));
 }
 
+void reduce_level_to_0_after_cure_drive() {
+    //Only **medic** can
+    board[Washington] = 8;
+    operationsExpert.drive(Washington);
+            CHECK(board[Washington] == 8);
+    dispatcher.drive(Washington);
+            CHECK(board[Washington] == 8);
+    scientist.drive(Washington);
+            CHECK(board[Washington] == 8);
+    researcher.drive(Washington);
+            CHECK(board[Washington] == 8);
+    virologist.drive(Washington);
+            CHECK(board[Washington] == 8);
+    geneSplicer.drive(Washington);
+            CHECK(board[Washington] == 8);
+    fieldDoctor.drive(Washington);
+            CHECK(board[Washington] == 8);
+    medic.drive(Washington);
+            CHECK(board[Washington] == 0);
+}
+
+void reduce_level_to_0_after_cure_fly_direct() {
+    //Only **medic** can
+    all_take_card(Madrid);
+    board[Madrid] = 8;
+    operationsExpert.fly_direct(Madrid);
+            CHECK(board[Madrid] == 8);
+    dispatcher.fly_direct(Madrid);
+            CHECK(board[Madrid] == 8);
+    scientist.fly_direct(Madrid);
+            CHECK(board[Madrid] == 8);
+    researcher.fly_direct(Madrid);
+            CHECK(board[Madrid] == 8);
+    virologist.fly_direct(Madrid);
+            CHECK(board[Madrid] == 8);
+    geneSplicer.fly_direct(Madrid);
+            CHECK(board[Madrid] == 8);
+    fieldDoctor.fly_direct(Madrid);
+            CHECK(board[Madrid] == 8);
+    medic.fly_direct(Madrid);
+            CHECK(board[Madrid] == 0);
+}
+
+void reduce_level_to_0_after_cure_fly_charter() {
+    //Only **medic** can
+    all_take_card(Madrid);
+    board[Chicago] = 8;
+    operationsExpert.fly_charter(Chicago);
+            CHECK(board[Chicago] == 8);
+    dispatcher.fly_charter(Chicago);
+            CHECK(board[Chicago] == 8);
+    scientist.fly_charter(Chicago);
+            CHECK(board[Chicago] == 8);
+    researcher.fly_charter(Chicago);
+            CHECK(board[Chicago] == 8);
+    virologist.fly_charter(Chicago);
+            CHECK(board[Chicago] == 8);
+    geneSplicer.fly_charter(Chicago);
+            CHECK(board[Chicago] == 8);
+    fieldDoctor.fly_charter(Chicago);
+            CHECK(board[Chicago] == 8);
+    medic.fly_charter(Chicago);
+            CHECK(board[Chicago] == 0);
+}
+
+void reduce_level_to_0_after_cure_fly_shuttle() {
+    //Only **medic** can
+    board[Essen] = 8;
+    operationsExpert.fly_shuttle(Essen);
+            CHECK(board[Essen] == 8);
+    dispatcher.fly_shuttle(Essen);
+            CHECK(board[Essen] == 8);
+    scientist.fly_shuttle(Essen);
+            CHECK(board[Essen] == 8);
+    researcher.fly_shuttle(Essen);
+            CHECK(board[Essen] == 8);
+    virologist.fly_shuttle(Essen);
+            CHECK(board[Essen] == 8);
+    geneSplicer.fly_shuttle(Essen);
+            CHECK(board[Essen] == 8);
+    fieldDoctor.fly_shuttle(Essen);
+            CHECK(board[Essen] == 8);
+    medic.fly_shuttle(Essen);
+            CHECK(board[Essen] == 0);
+}
+
+
 TEST_CASE ("treat - regular actions") {
     //all in NewYork
     board.remove_cures();
@@ -593,4 +655,13 @@ TEST_CASE ("treat - regular actions") {
     all_throw();
     able_to_treat_not_in_the_same_city();
     able_to_treat_not_in_a_nearby_city();
+    //discover blue cure
+    builder.take_card(London).take_card(Paris).take_card(Washington).take_card(Essen).take_card(Milan);
+    builder.discover_cure(Blue);
+    reduce_level_to_0_after_cure_drive();
+    reduce_level_to_0_after_cure_fly_direct();
+    reduce_level_to_0_after_cure_fly_charter();
+    build_in(Chicago);
+    build_in(Essen);
+    reduce_level_to_0_after_cure_fly_shuttle();
 }

@@ -5,19 +5,27 @@
 using namespace std;
 namespace pandemic {
 
-    bool Player::removeCards(int indexStart, int indexEnd, int n) {
+    bool Player::removeCards(size_t indexStart, size_t indexEnd, int n) {
         int counter = 0;
-        for (int i = indexStart; i < indexEnd; i++) {
-            if (cards[i]) counter++;
-            if (counter == n) break;
+        for (size_t i = indexStart; i < indexEnd; i++) {
+            if (cards.at(i)) {
+                counter++;
+            }
+            if (counter == n) {
+                break;
+            }
         }
-        if (counter < n) return false;
-        for (int i = indexStart; i < indexEnd; i++) {
-            if (cards[i]) {
-                cards[i] = false;
+        if (counter < n) {
+            return false;
+        }
+        for (size_t i = indexStart; i < indexEnd; i++) {
+            if (cards.at(i)) {
+                cards.at(i) = false;
                 counter--;
             }
-            if (counter == 0) break;
+            if (counter == 0) {
+                break;
+            }
         }
         return true;
     }
@@ -26,20 +34,18 @@ namespace pandemic {
         if (this->board.are_neighbors(curr_city, other)) {
             curr_city = other;
             return *this;
-        } else {
-            string message =
-                    board.get_city_name(curr_city) + " and " + board.get_city_name(other) + " aren't neighbors!";
-            throw std::invalid_argument(message);
         }
+        string message =
+                board.get_city_name(curr_city) + " and " + board.get_city_name(other) + " aren't neighbors!";
+        throw std::invalid_argument(message);
     }
 
     void Player::fly(City dest_city, City card) {
-        if (cards[int(card)]) { //if card exist
+        if (!cards.at(size_t(card))) { //if card doesn't exist
             curr_city = dest_city;
-            cards[int(card)] = false;
-            return;
+            cards.at(size_t(card)) = false;
         } else {
-            string message = role()+" don't have a " + board.get_city_name(card) + " card!";
+            string message = role() + " don't have a " + board.get_city_name(card) + " card!";
             throw std::invalid_argument(message);
         }
     }
@@ -68,10 +74,10 @@ namespace pandemic {
     }
 
     void Player::build() {
-        if (cards[int(curr_city)]) {
+        if (cards.at(size_t(curr_city))) {
             if (!board.is_there_research_station(curr_city)) {
                 board.build(curr_city);
-                cards[int(curr_city)] = false;
+                cards.at(size_t(curr_city)) = false;
             }
         } else {
             string message = "You don't have a  " + board.get_city_name(curr_city) + " card!";
@@ -81,29 +87,37 @@ namespace pandemic {
 
 
     Player &Player::take_card(City city) {
-        cards[int(city)] = true;
+        cards.at(size_t(city)) = true;
         return *this;
     }
 
     void Player::discover_cure(Color color) {
         if (board.is_there_research_station(curr_city)) {
-            bool res;
+            bool res = false;
             switch (color) {
                 case Blue:
-                    if (board.blue_cure) return; //If blue cure exists we won't take the cards
-                    board.blue_cure = res = removeCards(0, 12, 5);
+                    if (board.blue_cure) {
+                        return; //If blue cure exists we won't take the cards
+                    }
+                    board.blue_cure = res = removeCards(lower_blue, higher_blue, default_num_of_cards);
                     break;
                 case Yellow:
-                    if (board.yellow_cure) return; //If yellow cure exists we won't take the cards
-                    board.yellow_cure = res = removeCards(12, 24, 5);
+                    if (board.yellow_cure) {
+                        return; //If yellow cure exists we won't take the cards
+                    }
+                    board.yellow_cure = res = removeCards(lower_yellow, higher_yellow, default_num_of_cards);
                     break;
                 case Black:
-                    if (board.black_cure) return; //If black cure exists we won't take the cards
-                    board.black_cure = res = removeCards(24, 36, 5);
+                    if (board.black_cure) {
+                        return; //If black cure exists we won't take the cards
+                    }
+                    board.black_cure = res = removeCards(lower_black, higher_black, default_num_of_cards);
                     break;
                 case Red:
-                    if (board.red_cure) return; //If red cure exists we won't take the cards
-                    board.red_cure = res = removeCards(36, 48, 5);
+                    if (board.red_cure) {
+                        return; //If red cure exists we won't take the cards
+                    }
+                    board.red_cure = res = removeCards(lower_red, higher_red, default_num_of_cards);
                     break;
             }
             if (!res) {
@@ -167,8 +181,8 @@ namespace pandemic {
     }
 
     void Player::remove_cards() {
-        for (int i=0; i<49; i++){
-            cards[i]= false;
+        for (size_t i = lower_blue; i < higher_red + 1; i++) {
+            cards.at(i) = false;
         }
     }
 }

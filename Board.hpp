@@ -32,7 +32,7 @@ namespace pandemic{
         void build(City city);
         bool are_neighbors(City first, City second); //public so we can reach it from class Player
         int& operator[] (City city); //write
-        const int operator[] (City city) const; //read
+        int operator[] (City city) const; //read
         friend std::ostream &operator<<(std::ostream &os, const Board &board);
         bool is_clean();
         void remove_cures();

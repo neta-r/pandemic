@@ -100,7 +100,7 @@ namespace pandemic{
     int& Board::operator[] (City city){ //write
         return cities.at(city).level;
     }
-    const int Board::operator[] (City city) const { //read
+    int Board::operator[] (City city) const { //read
         return cities.at(city).level;
     }
 
@@ -129,15 +129,21 @@ namespace pandemic{
 
     bool Board::is_clean(){
         for (int i=0; i<cities.size(); i++){
-            if (cities[ static_cast<City>(i)].level!=0) return false;
+            if (cities[ static_cast<City>(i)].level!=0){
+                return false;
+            }
         }
         return true;
     }
 
     bool Board::are_neighbors(City first, City second){
-        if (first==second) return true;
+        if (first==second) {
+            return true;
+        }
         for (auto nei:this->cities.at(first).nei){
-            if (nei==second) return true;
+            if (nei==second) {
+                return true;
+            }
         }
         return false;
     }

@@ -17,10 +17,10 @@ namespace pandemic {
         return *this;
     }
 
-    Player &Medic::fly_direct(City other) {
+    Player &Medic::fly_direct(City dest_city) {
         try {
-            Player::fly_direct(other);
-            board.reduce_city_level_by_all(static_cast<City>(other));
+            Player::fly_direct(dest_city);
+            board.reduce_city_level_by_all(static_cast<City>(dest_city));
         }
         catch (const exception &ex) {
             throw ex.what();
@@ -28,10 +28,10 @@ namespace pandemic {
         return *this;
     }
 
-    Player &Medic::fly_charter(City other) {
+    Player &Medic::fly_charter(City dest_city) {
         try {
-            Player::fly_charter(other);
-            board.reduce_city_level_by_all(static_cast<City>(other));
+            Player::fly_charter(dest_city);
+            board.reduce_city_level_by_all(static_cast<City>(dest_city));
         }
         catch (const exception &ex) {
             throw ex.what();
@@ -39,10 +39,10 @@ namespace pandemic {
         return *this;
     }
 
-    Player &Medic::fly_shuttle(City other) {
+    Player &Medic::fly_shuttle(City dest_city) {
         try {
-            Player::fly_shuttle(other);
-            board.reduce_city_level_by_all(static_cast<City>(other));
+            Player::fly_shuttle(dest_city);
+            board.reduce_city_level_by_all(static_cast<City>(dest_city));
     } catch (const exception &ex) {
         throw ex.what();
     }

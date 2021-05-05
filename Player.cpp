@@ -41,9 +41,9 @@ namespace pandemic {
     }
 
     void Player::fly(City dest_city, City card) {
-        if (!cards.at(size_t(card))) { //if card doesn't exist
+        if (cards.at(board.get_city_num(card))) { //if card exist
             curr_city = dest_city;
-            cards.at(size_t(card)) = false;
+            cards.at(board.get_city_num(card)) = false;
         } else {
             string message = role() + " don't have a " + board.get_city_name(card) + " card!";
             throw std::invalid_argument(message);
@@ -74,10 +74,10 @@ namespace pandemic {
     }
 
     void Player::build() {
-        if (cards.at(size_t(curr_city))) {
+        if (cards.at(board.get_city_num(curr_city))) {
             if (!board.is_there_research_station(curr_city)) {
                 board.build(curr_city);
-                cards.at(size_t(curr_city)) = false;
+                cards.at(board.get_city_num(curr_city)) = false;
             }
         } else {
             string message = "You don't have a  " + board.get_city_name(curr_city) + " card!";
@@ -87,7 +87,7 @@ namespace pandemic {
 
 
     Player &Player::take_card(City city) {
-        cards.at(size_t(city)) = true;
+        cards.at(board.get_city_num(city)) = true;
         return *this;
     }
 

@@ -11,6 +11,7 @@ namespace pandemic{
         std::vector<City> nei;
         std::string city_name;
         bool research_station;
+        size_t city_num;
         int level; //public so the operator [] could change it
         Holder() { //default constructor
             city_name="";
@@ -19,8 +20,8 @@ namespace pandemic{
             research_station= false;
             nei= std::vector<City>();
         }
-        Holder(Color c,std::string name, City nei1=nullCity, City nei2=nullCity, City nei3=nullCity,
-               City nei4=nullCity, City nei5=nullCity, City nei6=nullCity): c(c), city_name(name), level(0){
+        Holder(Color c,std::string name,size_t num, City nei1=nullCity, City nei2=nullCity, City nei3=nullCity,
+               City nei4=nullCity, City nei5=nullCity, City nei6=nullCity): c(c), city_name(name), level(0), city_num(num){
             this->nei.push_back(nei1);
             if (nei2!=nullCity) this->nei.push_back(nei2);
             if (nei3!=nullCity) this->nei.push_back(nei3);

@@ -19,7 +19,7 @@ namespace pandemic {
 
         Board &board;
         City curr_city;
-        std::array<bool,48> cards;
+        std::array<bool,49> cards;
         bool removeCards(size_t indexStart, size_t indexEnd, int n);
 
         void fly(City dest_city, City card);

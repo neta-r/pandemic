@@ -1,3 +1,4 @@
+
 /**
  * Demo program for Pandemic exercise - OperationsExpert role
  * 
@@ -124,32 +125,31 @@ int main() {
             .take_card(City::Bogota)
             .take_card(City::Lima);
 
+    player.discover_cure(Color::Yellow); // legal action: you discard 5 yellow cards and discover a yellow cure.
+    try {
+        player.fly_direct(City::Miami); // illegal action: you discarded the Miami card to discover a cure, so you cannot use this card.
+    } catch (const exception& ex) {
+        cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
+    }
 
-//    player.discover_cure(Color::Yellow); // legal action: you discard 5 yellow cards and discover a yellow cure.
-//    try {
-//        player.fly_direct(City::Miami); // illegal action: you discarded the Miami card to discover a cure, so you cannot use this card.
-//    } catch (const exception& ex) {
-//        cout << "   caught exception: " << ex.what() << endl;  // prints a meaningful error message.
-//    }
+    /* treat action after discovering a cure */
 
-//    /* treat action after discovering a cure */
-//
-//    player.drive(City::MexicoCity);
-//    cout << board[City::MexicoCity] << endl; // 3
-//    player.treat(City::MexicoCity);   // you now remove ALL disease cubes from MexicoCity, since there is a yelllow cure.
-//    cout << board[City::MexicoCity] << endl; // 0
-//
-//
-//    /* clean the board */
-//
-//    cout << board << endl;  // print the board in any reasonable format.
-//    cout << board.is_clean() << endl;  // print "0" - the board is not clean.
-//
-//    player.drive(City::Chicago)
-//            .treat(City::Chicago)             // remove one disease cube - there is no blue cure yet.
-//            .fly_direct(City::HoChiMinhCity)
-//            .treat(City::HoChiMinhCity);      // remove one disease cube - there is no red cure yet.
-//
-//    cout << board << endl;  // prints the board in any reasonable format.
-//    cout << board.is_clean() << endl;  // prints "1" - the board is clean - congratulations!!! You treated all diseases!!!
+    player.drive(City::MexicoCity);
+    cout << board[City::MexicoCity] << endl; // 3
+    player.treat(City::MexicoCity);   // you now remove ALL disease cubes from MexicoCity, since there is a yelllow cure.
+    cout << board[City::MexicoCity] << endl; // 0
+
+
+    /* clean the board */
+
+    cout << board << endl;  // print the board in any reasonable format.
+    cout << board.is_clean() << endl;  // print "0" - the board is not clean.
+
+    player.drive(City::Chicago)
+            .treat(City::Chicago)             // remove one disease cube - there is no blue cure yet.
+            .fly_direct(City::HoChiMinhCity)
+            .treat(City::HoChiMinhCity);      // remove one disease cube - there is no red cure yet.
+
+    cout << board << endl;  // prints the board in any reasonable format.
+    cout << board.is_clean() << endl;  // prints "1" - the board is clean - congratulations!!! You treated all diseases!!!
 }

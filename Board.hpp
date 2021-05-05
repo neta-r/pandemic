@@ -26,6 +26,7 @@ namespace pandemic{
         std::string get_city_name (City city); //to be able to print it in player class
         Color get_city_color (City city);
         int get_city_level (City city);
+        size_t get_city_num (City city);
         void reduce_city_level_by_one(City city);
         void reduce_city_level_by_all(City city);
         bool is_there_research_station(City city); //for build and fly_shuttle

@@ -38,6 +38,11 @@ namespace pandemic {
             throw std::invalid_argument(message);
         }
     }
+    void Scientist::remove_cards(){
+        int temp= number_of_cards;
+        Player::remove_cards();
+        this->number_of_cards=temp;
+    }
 
     string Scientist::role() {
         return "Scientist";

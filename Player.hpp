@@ -21,16 +21,7 @@ namespace pandemic {
             curr_city = curr;
         }
 
-        std::string get_location() { return board.get_city_name(curr_city); } //TODO:remove it later
-        std::string get_cards() {//TODO:remove it later
-            std::string ans="";
-            for (int i = 0; i < 49; i++){
-                if (cards[i]) ans+=board.get_city_name(static_cast<City>(i))+", ";
-            }
-            return ans;
-        }
-
-        void remove_cards();
+        virtual void remove_cards();
 
         virtual Player &take_card(City city);
 

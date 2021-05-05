@@ -91,31 +91,43 @@ void all_take_card(City city) {
     fieldDoctor.take_card(city);
 }
 
-void get_to(Player &p, City curr, City dest) {
-    p.take_card(curr);
-    p.fly_charter(dest);
-}
 
 void all_get_to(City curr, City dest) {
-    get_to(operationsExpert, curr, dest);
-    get_to(dispatcher, curr, dest);
-    get_to(scientist, curr, dest);
-    get_to(researcher, curr, dest);
-    get_to(medic, curr, dest);
-    get_to(virologist, curr, dest);
-    get_to(geneSplicer, curr, dest);
-    get_to(fieldDoctor, curr, dest);
+    operationsExpert.take_card(curr);
+    operationsExpert.fly_charter(dest);
+    dispatcher.take_card(curr);
+    dispatcher.fly_charter(dest);
+    scientist.take_card(curr);
+    scientist.fly_charter(dest);
+    researcher.take_card(curr);
+    researcher.fly_charter(dest);
+    medic.take_card(curr);
+    medic.fly_charter(dest);
+    virologist.take_card(curr);
+    virologist.fly_charter(dest);
+    geneSplicer.take_card(curr);
+    geneSplicer.fly_charter(dest);
+    fieldDoctor.take_card(curr);
+    fieldDoctor.fly_charter(dest);
 }
 
 void spread(City common_curr_city) {
-    get_to(operationsExpert, common_curr_city, BuenosAires);
-    get_to(dispatcher, common_curr_city, Istanbul);
-    get_to(scientist, common_curr_city, Paris);
-    get_to(researcher, common_curr_city, Mumbai);
-    get_to(medic, common_curr_city, Sydney);
-    get_to(virologist, common_curr_city, Essen);
-    get_to(geneSplicer, common_curr_city, SanFrancisco);
-    get_to(fieldDoctor, common_curr_city, Santiago);
+    operationsExpert.take_card(common_curr_city);
+    operationsExpert.fly_charter(BuenosAires);
+    dispatcher.take_card(common_curr_city);
+    dispatcher.fly_charter(Istanbul);
+    scientist.take_card(common_curr_city);
+    scientist.fly_charter(Paris);
+    researcher.take_card(common_curr_city);
+    researcher.fly_charter(Mumbai);
+    medic.take_card(common_curr_city);
+    medic.fly_charter(Sydney);
+    virologist.take_card(common_curr_city);
+    virologist.fly_charter(Essen);
+    geneSplicer.take_card(common_curr_city);
+    geneSplicer.fly_charter(SanFrancisco);
+    fieldDoctor.take_card(common_curr_city);
+    fieldDoctor.fly_charter(Santiago);
 }
 
 void take_different_cards() {
@@ -139,6 +151,7 @@ void clear_all() {
     geneSplicer.remove_cards();
     fieldDoctor.remove_cards();
 }
+
 
 TEST_CASE ("drive") {
     //able to drive to a nearby city in the same color
@@ -177,6 +190,7 @@ TEST_CASE ("drive") {
             CHECK_THROWS(virologist.drive(Cairo));
             CHECK_THROWS(geneSplicer.drive(Cairo));
             CHECK_THROWS(fieldDoctor.drive(Cairo));
+    clear_all();
 }
 
 TEST_CASE ("fly_direct") {
@@ -227,6 +241,7 @@ TEST_CASE ("fly_direct") {
     //let's bring dispatcher back to Madrid
     dispatcher.take_card(Madrid);
     dispatcher.fly_direct(Madrid);
+    clear_all();
 }
 
 TEST_CASE ("fly_charter") {
@@ -262,6 +277,7 @@ TEST_CASE ("fly_charter") {
             CHECK_THROWS(virologist.fly_charter(Tokyo));
             CHECK_THROWS(geneSplicer.fly_charter(Tokyo));
             CHECK_THROWS(fieldDoctor.fly_charter(Tokyo));
+    clear_all();
 }
 
 TEST_CASE ("fly_shuttle") {
@@ -304,6 +320,7 @@ TEST_CASE ("fly_shuttle") {
             CHECK_THROWS(virologist.fly_shuttle(Milan));
             CHECK_THROWS(geneSplicer.fly_shuttle(Milan));
             CHECK_THROWS(fieldDoctor.fly_shuttle(Milan));
+    clear_all();
 }
 
 TEST_CASE ("build") {
@@ -348,7 +365,6 @@ TEST_CASE ("build") {
     operationsExpert.fly_direct(BuenosAires);
     all_get_to(BuenosAires, Algiers);
     //unable to build in Algiers except for operations expert
-            CHECK_NOTHROW(operationsExpert.build());
             CHECK_THROWS(dispatcher.build());
             CHECK_THROWS(scientist.build());
             CHECK_THROWS(researcher.build());
@@ -356,12 +372,15 @@ TEST_CASE ("build") {
             CHECK_THROWS(virologist.build());
             CHECK_THROWS(geneSplicer.build());
             CHECK_THROWS(fieldDoctor.build());
+            CHECK_NOTHROW(operationsExpert.build());
+    clear_all();
 }
 
 
 void discover_twice(Player &p, City research, City one, City two, City three, City four, City five, Color color) {
     p.take_card(one).take_card(two).take_card(three).take_card(four).take_card(five);
             CHECK_NOTHROW(p.discover_cure(color));
+            p.remove_cards();
     p.take_card(one).take_card(two).take_card(three).take_card(four).take_card(five);
             CHECK_NOTHROW(p.discover_cure(color));
             CHECK_NOTHROW(p.fly_direct(one));
@@ -369,7 +388,8 @@ void discover_twice(Player &p, City research, City one, City two, City three, Ci
             CHECK_NOTHROW(p.fly_direct(three));
             CHECK_NOTHROW(p.fly_direct(four));
             CHECK_NOTHROW(p.fly_direct(five));
-    get_to(p, five, research);
+            p.take_card(five);
+            p.fly_charter(research);
     board.remove_cures();
 }
 
@@ -420,11 +440,11 @@ void able_to_discover_mixed_color(City one, City two, City three, City four, Cit
 }
 
 TEST_CASE ("discover cure - mixed colors") {
-    clear_all();
     able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Blue);
     able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Yellow);
     able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Black);
     able_to_discover_mixed_color(SanFrancisco, Bogota, Chennai, Sydney, Miami, Red);
+    clear_all();
 }
 
 void able_to_discover_with_three_cards(City one, City two, City three, Color color) {

@@ -135,6 +135,7 @@ namespace pandemic{
     }
 
     bool Board::are_neighbors(City first, City second){
+        if (first==second) return true;
         for (auto nei:this->cities.at(first).nei){
             if (nei==second) return true;
         }

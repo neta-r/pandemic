@@ -59,7 +59,7 @@ namespace pandemic{
         cities[HoChiMinhCity]=Holder(Red,"HoChiMinhCity",size_t(HoChiMinhCity),Jakarta,Bangkok,HongKong,Manila);
         cities[HongKong]=Holder(Red,"HongKong",size_t(HongKong),Bangkok,Kolkata,HoChiMinhCity,Shanghai,Manila,Taipei);
         cities[Jakarta]=Holder(Red,"Jakarta",size_t(Jakarta),Chennai,Bangkok,HoChiMinhCity,Sydney);
-        cities[Manila]=Holder(Red,"Manila",size_t(Manila),Taipei,SanFrancisco,HoChiMinhCity,Sydney);
+        cities[Manila]=Holder(Red,"Manila",size_t(Manila),Taipei,SanFrancisco,HoChiMinhCity,Sydney,HongKong);
         cities[Osaka]=Holder(Red,"Osaka",size_t(Osaka),Taipei,Tokyo);
         cities[Seoul]=Holder(Red,"Seoul",size_t(Seoul),Beijing,Shanghai,Tokyo);
         cities[Shanghai]=Holder(Red,"Shanghai",size_t(Shanghai),Beijing,HongKong,Taipei,Seoul,Tokyo);

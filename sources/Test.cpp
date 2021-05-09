@@ -1,4 +1,4 @@
-#include "doctest.h"
+#include "../doctest.h"
 #include "Board.hpp"
 #include "City.hpp"
 #include "Color.hpp"

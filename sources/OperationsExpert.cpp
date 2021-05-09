@@ -12,6 +12,6 @@ namespace pandemic {
         }
     }
     string OperationsExpert::role(){
-        return "Operations Expert";
+        return "OperationsExpert";
     }
 }

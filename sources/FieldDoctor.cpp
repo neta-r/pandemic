@@ -50,6 +50,6 @@ namespace pandemic {
         return *this;
     }
     string FieldDoctor::role() {
-        return "Field Doctor";
+        return "FieldDoctor";
     }
 }

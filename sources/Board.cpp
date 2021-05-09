@@ -29,7 +29,7 @@ namespace pandemic{
         cities[Bogota]=Holder(Yellow,"Bogota",size_t(Bogota),MexicoCity,Lima,Miami,SaoPaulo,BuenosAires);
         cities[BuenosAires]=Holder(Yellow,"BuenosAires",size_t(BuenosAires),Bogota,SaoPaulo);
         cities[Johannesburg]=Holder(Yellow,"Johannesburg",size_t(Johannesburg),Kinshasa,Khartoum);
-        cities[Khartoum]=Holder(Yellow,"Khartoum",size_t(Khartoum),Lagos,Kinshasa,Johannesburg);
+        cities[Khartoum]=Holder(Yellow,"Khartoum",size_t(Khartoum),Lagos,Kinshasa,Johannesburg,Cairo);
         cities[Kinshasa]=Holder(Yellow,"Kinshasa",size_t(Kinshasa),Lagos,Khartoum,Johannesburg);
         cities[Lagos]=Holder(Yellow,"Lagos",size_t(Lagos),SaoPaulo,Khartoum,Kinshasa);
         cities[Lima]=Holder(Yellow,"Lima",size_t(Lima),MexicoCity,Bogota,Santiago);

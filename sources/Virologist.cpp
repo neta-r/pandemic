@@ -14,6 +14,7 @@ namespace pandemic {
                     "Current city's level of disease is 0!";
             throw std::invalid_argument(message);
         }
+        //TODO: FIX !!
         switch (c) {
             case Blue:
                 if (!board.blue_cure) {

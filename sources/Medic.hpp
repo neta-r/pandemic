@@ -7,8 +7,10 @@
 #include "Player.hpp"
 namespace pandemic {
     class Medic : public Player {
+        void check_color_and_treat(City city);
     public:
         Medic(Board& board, City city): Player(board, city){}
+
         Player & treat(City city);
 
         Player &drive(City other);

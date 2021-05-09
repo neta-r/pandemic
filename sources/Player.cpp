@@ -41,6 +41,10 @@ namespace pandemic {
     }
 
     void Player::fly(City dest_city, City card) {
+        if (curr_city == dest_city) {
+            string message = "You can't fly from the city to itself";
+            throw std::invalid_argument(message);
+        }
         if (cards.at(board.get_city_num(card))) { //if card exist
             curr_city = dest_city;
             cards.at(board.get_city_num(card)) = false;
@@ -61,6 +65,10 @@ namespace pandemic {
     }
 
     Player &Player::fly_shuttle(City dest_city) {
+        if (curr_city == dest_city) {
+            string message = "You can't fly from the city to itself";
+            throw std::invalid_argument(message);
+        }
         if (board.is_there_research_station(curr_city) && board.is_there_research_station(dest_city)) {
             curr_city = dest_city;
         } else if (!board.is_there_research_station(curr_city)) {

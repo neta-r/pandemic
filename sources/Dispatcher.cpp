@@ -7,6 +7,10 @@
 using namespace std;
 namespace pandemic {
     Player &Dispatcher::fly_direct(City dest_city) {
+        if (curr_city == dest_city) {
+            string message = "You can't fly from the city to itself";
+            throw std::invalid_argument(message);
+        }
         if (board.is_there_research_station(curr_city)){
             curr_city = dest_city;
         }

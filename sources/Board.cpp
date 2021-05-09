@@ -93,7 +93,7 @@ namespace pandemic{
     }
 
     bool Board::is_there_research_station(City city){
-        return cities[city].research_station;
+        return cities.at(city).research_station;
     }
 
     void Board::build(City city){
